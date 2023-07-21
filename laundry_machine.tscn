@@ -1,25 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwypojrkdnrqo"]
+[gd_scene load_steps=7 format=3 uid="uid://cwypojrkdnrqo"]
 
 [ext_resource type="Texture2D" uid="uid://ciw0hoku0mdc5" path="res://assets/items/laundry-machine-spritemap.png" id="1_ilxwq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wiqvp"]
-size = Vector2(162, 349)
+size = Vector2(162, 226)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eyaei"]
 atlas = ExtResource("1_ilxwq")
 region = Rect2(0, 0, 171, 231)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7y2cm"]
-atlas = ExtResource("1_ilxwq")
-region = Rect2(342, 0, 171, 231)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_hkex3"]
 atlas = ExtResource("1_ilxwq")
 region = Rect2(171, 0, 171, 231)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3c0u3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7y2cm"]
 atlas = ExtResource("1_ilxwq")
-region = Rect2(513, 0, 171, 231)
+region = Rect2(342, 0, 171, 231)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b18i2"]
 animations = [{
@@ -33,28 +29,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7y2cm")
-}],
-"loop": true,
-"name": &"interact",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_hkex3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3c0u3")
+"texture": SubResource("AtlasTexture_7y2cm")
 }],
 "loop": true,
 "name": &"static",
 "speed": 8.0
 }]
 
-[node name="LaundryMachine" type="Area2D"]
+[node name="LaundryMachine" type="StaticBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 60.5)
+position = Vector2(-1, -1)
 shape = SubResource("RectangleShape2D_wiqvp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
