@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbo3o2fy3wjwg"]
+
+[ext_resource type="Texture2D" uid="uid://c6dr5nw1lt8ir" path="res://assets/sprites/player lol.png" id="1_ik5oa"]
+[ext_resource type="Script" path="res://player.gd" id="1_ky3n3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h61t7"]
+atlas = ExtResource("1_ik5oa")
+region = Rect2(0, 0, 260, 511)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p64p"]
+atlas = ExtResource("1_ik5oa")
+region = Rect2(260, 0, 260, 511)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6b0dy"]
+atlas = ExtResource("1_ik5oa")
+region = Rect2(520, 0, 260, 511)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n16d"]
+atlas = ExtResource("1_ik5oa")
+region = Rect2(780, 0, 260, 511)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gfyhi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h61t7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_8p64p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6b0dy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n16d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6b0dy")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_labfi"]
+size = Vector2(41, 232)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_ky3n3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_gfyhi")
+animation = &"walk"
+frame_progress = 0.0615038
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 2)
+shape = SubResource("RectangleShape2D_labfi")
