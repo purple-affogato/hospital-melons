@@ -4,7 +4,7 @@ var interactObject = ""
 var biohazard = ["A biohazard container", "I don't think biological waste is supposed to glow green"]
 var heartThing = ["A heart monitor", "It's not working..."]
 var bed = ["A bed", "It looks very uncomfy", "Good thing I'm not tired"]
-var outlet = ["A broken wire, looks like it's for the heart monitor", "... looks dangerous"]
+var outlet = ["A broken wire, looks like it's for the heart monitor", "... looks dangerous", "What if I stuff the scissors into here..."]
 var cart = ["A Surgical cart", "Not much equipment on it, what a cheap hospital", "Oo but there are scissors!"]
 
 var reading = false
@@ -26,6 +26,9 @@ func _process(delta):
 	if $DiaCont/DialogueBox.reading == false and reading:
 		if interactObject == "cart":
 			$Inventory.addItem("res://assets/items/scissors.png", "scissors")
+		if interactObject == "outlet" and $Inventory.item == "scissors":
+			$Inventory.visible = false
+			$heartLine.visible = true
 		reading = false
 	
 	if Input.is_key_pressed(KEY_E):
@@ -46,8 +49,11 @@ func _process(delta):
 		elif interactObject == "outlet":
 			$DiaCont/DialogueBox.visible = true
 			$DiaCont/DialogueBox.start_reading(outlet)
+			if $Inventory.visible == false:
+				$DiaCont/DialogueBox.start_reading(outlet.slice(0,2))
+			else:
+				$DiaCont/DialogueBox.start_reading(outlet.slice(0,3))
 		elif interactObject == "cart":
-			print("playing")
 			$DiaCont/DialogueBox.visible = true
 			if $Inventory.visible == false:
 				$DiaCont/DialogueBox.start_reading(cart)

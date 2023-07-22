@@ -17,3 +17,5 @@ func addItem(imgPath, itemName):
 func _process(delta):
 	if visible and Input.is_key_pressed(KEY_X):
 		visible = false
+	if !visible:
+		item = ""
