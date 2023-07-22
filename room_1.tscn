@@ -105,7 +105,7 @@ sprite_frames = SubResource("SpriteFrames_55kmu")
 position = Vector2(1368, 364)
 shape = SubResource("RectangleShape2D_qv0ty")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("5_36dd3")]
+[node name="Player" parent="." instance=ExtResource("5_36dd3")]
 position = Vector2(136, 352)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
