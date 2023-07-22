@@ -20,12 +20,12 @@ texture = ExtResource("1_ifqet")
 [node name="LaundryMachine1" parent="." instance=ExtResource("3_hww3j")]
 position = Vector2(503, 187)
 
+[node name="CharacterBody2D" parent="." instance=ExtResource("5_36dd3")]
+position = Vector2(116, 273)
+
 [node name="DialogueBox" parent="." instance=ExtResource("4_tdoma")]
 visible = false
 position = Vector2(24, 357)
-
-[node name="CharacterBody2D" parent="." instance=ExtResource("5_36dd3")]
-position = Vector2(116, 273)
 
 [node name="walls" type="StaticBody2D" parent="."]
 

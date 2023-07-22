@@ -1,11 +1,21 @@
 extends Node2D
 
 @onready var label = $RichTextLabel
+var dialogue = []
+var idx = 0
+var reading = false
 
 func _process(delta):
-	if Input.is_key_pressed(KEY_ENTER): # this is how you check for the enter key
-		set_label("what")
+	print(InputEventKey)
+	if reading == true and Input.is_action_just_released("enter"): # this is how you check for the enter key
+		if idx == len(dialogue):
+			reading = false
+			visible = false
+		else:
+			label.text = dialogue[idx]
+			idx += 1
 
-func set_label(string):
-	label.text = string # and this is how you change the text label
-
+func start_reading(array):
+	dialogue = array
+	idx = 0
+	reading = true
