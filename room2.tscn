@@ -1,12 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmigj6t4jd3de"]
+[gd_scene load_steps=20 format=3 uid="uid://dmigj6t4jd3de"]
 
 [ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="1_ak4e3"]
+[ext_resource type="Script" path="res://room2.gd" id="1_f5fp5"]
 [ext_resource type="Texture2D" uid="uid://btx07qvmncee4" path="res://assets/backgrounds/room2-bg.png" id="2_dgnlw"]
 [ext_resource type="Texture2D" uid="uid://ytg4rgyv56jn" path="res://assets/items/heart-line.png" id="2_nxcmd"]
 [ext_resource type="Script" path="res://heart line.gd" id="3_2314g"]
 [ext_resource type="PackedScene" uid="uid://c8yfccrywl1w8" path="res://inventory.tscn" id="5_87uyv"]
-
-[sub_resource type="GDScript" id="GDScript_c8amf"]
+[ext_resource type="Texture2D" uid="uid://bwc546lcms3lm" path="res://assets/items/heartThing.png" id="6_ielvq"]
+[ext_resource type="Texture2D" uid="uid://bhdefhcabmrpr" path="res://assets/items/bed.png" id="7_8fcgx"]
+[ext_resource type="Texture2D" uid="uid://m52bm0pdbgle" path="res://assets/items/outlet.png" id="8_5i0ps"]
+[ext_resource type="Texture2D" uid="uid://dvaie2dri5r0x" path="res://assets/items/cart.png" id="9_eqgf4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mw4st"]
 size = Vector2(2058, 7)
@@ -17,8 +20,26 @@ size = Vector2(10, 610)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gtaff"]
 size = Vector2(8, 600)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_54mb3"]
+size = Vector2(177, 335)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1qk5"]
+size = Vector2(112, 172)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4r5b"]
+size = Vector2(87, 381)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4cs4t"]
+size = Vector2(432, 210)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ub680"]
+size = Vector2(99, 115)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p15ep"]
+size = Vector2(183, 135)
+
 [node name="Node2D" type="Node2D"]
-script = SubResource("GDScript_c8amf")
+script = ExtResource("1_f5fp5")
 
 [node name="bg" type="Sprite2D" parent="."]
 position = Vector2(1024, 300)
@@ -54,7 +75,91 @@ shape = SubResource("RectangleShape2D_trm3w")
 position = Vector2(2052, 300)
 shape = SubResource("RectangleShape2D_gtaff")
 
+[node name="Node2D" parent="." instance=ExtResource("5_87uyv")]
+
+[node name="door" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door"]
+position = Vector2(554.5, 412.5)
+shape = SubResource("RectangleShape2D_54mb3")
+
+[node name="ColorRect" type="ColorRect" parent="door"]
+offset_left = 466.0
+offset_top = 245.0
+offset_right = 506.0
+offset_bottom = 285.0
+scale = Vector2(4.42693, 8.35596)
+color = Color(0.203922, 0.717647, 0.47451, 0.321569)
+
+[node name="biohazard" type="Area2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="biohazard"]
+offset_left = 56.0
+offset_top = 403.0
+offset_right = 165.0
+offset_bottom = 566.0
+color = Color(0.203922, 0.717647, 0.47451, 0.321569)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="biohazard"]
+position = Vector2(110, 480)
+shape = SubResource("RectangleShape2D_j1qk5")
+
+[node name="heartThing" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heartThing"]
+position = Vector2(819.5, 386.5)
+shape = SubResource("RectangleShape2D_a4r5b")
+
+[node name="Sprite2D" type="Sprite2D" parent="heartThing"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_ielvq")
+centered = false
+
+[node name="bed" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bed"]
+position = Vector2(1149, 487)
+shape = SubResource("RectangleShape2D_4cs4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="bed"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_8fcgx")
+centered = false
+
+[node name="outlet" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="outlet"]
+position = Vector2(1517.5, 524.5)
+shape = SubResource("RectangleShape2D_ub680")
+
+[node name="Sprite2D" type="Sprite2D" parent="outlet"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_5i0ps")
+centered = false
+
+[node name="cart" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cart"]
+position = Vector2(1822.5, 515.5)
+shape = SubResource("RectangleShape2D_p15ep")
+
+[node name="Sprite2D" type="Sprite2D" parent="cart"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_eqgf4")
+centered = false
+
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_ak4e3")]
 position = Vector2(304, 464)
 
-[node name="Node2D" parent="." instance=ExtResource("5_87uyv")]
+[connection signal="body_entered" from="door" to="." method="_on_door_body_entered"]
+[connection signal="body_exited" from="door" to="." method="_on_door_body_exited"]
+[connection signal="body_entered" from="biohazard" to="." method="_on_biohazard_body_entered"]
+[connection signal="body_exited" from="biohazard" to="." method="_on_biohazard_body_exited"]
+[connection signal="body_entered" from="heartThing" to="." method="_on_heart_thing_body_entered"]
+[connection signal="body_exited" from="heartThing" to="." method="_on_heart_thing_body_exited"]
+[connection signal="body_entered" from="bed" to="." method="_on_bed_body_entered"]
+[connection signal="body_exited" from="bed" to="." method="_on_bed_body_exited"]
+[connection signal="body_entered" from="outlet" to="." method="_on_outlet_body_entered"]
+[connection signal="body_exited" from="outlet" to="." method="_on_outlet_body_exited"]
+[connection signal="body_entered" from="cart" to="." method="_on_cart_body_entered"]
+[connection signal="body_exited" from="cart" to="." method="_on_cart_body_exited"]

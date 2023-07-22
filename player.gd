@@ -10,7 +10,6 @@ func _physics_process(delta):
 			scale.x = -1
 			flip = false
 		$AnimatedSprite2D.play("walk")
-		print("PLAYING")
 	elif Input.is_action_pressed("left"):
 		velocity.x = -SPEED
 		if !flip:
@@ -21,5 +20,5 @@ func _physics_process(delta):
 		$AnimatedSprite2D.play("idle")
 		velocity.x = 0
 
-	print(scale.x)
+
 	move_and_slide()
