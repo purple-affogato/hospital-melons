@@ -1,64 +1,53 @@
 extends Node2D
 
 var interactObject = ""
-var biohazard = ["A biohazard container", "I don't think biological waste is supposed to glow green"]
-var heartThing = ["A heart monitor", "It's not working..."]
-var bed = ["A bed", "It looks very uncomfy", "Good thing I'm not tired"]
-var outlet = ["A broken wire, looks like it's for the heart monitor", "... looks dangerous", "What if I stuff the scissors into here..."]
-var cart = ["A Surgical cart", "Not much equipment on it, what a cheap hospital", "Oo but there are scissors!"]
+
+var dialogue = {
+	"door" : [],
+	"heartLine" : [],
+	"biohazard" : ["A biohazard container", "I don't think biological waste is supposed to glow green"],
+	"heartThing" : ["A heart monitor", "It's not working..."],
+	"bed" : ["A bed", "It looks very uncomfy", "Good thing I'm not tired"],
+	"outlet" : {["A broken wire, looks like it's for the heart monitor", "... looks dangerous", "What if I stuff the scissors into here..."] : [[0,2], [0,3]]},
+	"cart" : {["A Surgical cart", "Not much equipment on it, what a cheap hospital", "Oo but there are scissors!"] : [[0,3], [0,2]]}
+}
 
 var reading = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Inventory.visible = false
-	$door.visible = false
-	$biohazard.visible = false
-	$heartThing.visible = false
-	$heartLine.visible = false
-	$bed.visible = false
-	$outlet.visible = false
-	$cart.visible = false
+	for item in dialogue:
+		get_node(item).visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if $DiaCont/DialogueBox.reading == false and reading:
-		if interactObject == "cart":
-			$Inventory.addItem("res://assets/items/scissors.png", "scissors")
+		if interactObject == "cart": $Inventory.addItem("res://assets/items/scissors.png", "scissors")
 		if interactObject == "outlet" and $Inventory.item == "scissors":
 			$Inventory.visible = false
 			$heartLine.visible = true
 		reading = false
+		$Player.set_physics_process(true)
 	
-	if Input.is_key_pressed(KEY_E):
+	if Input.is_key_pressed(KEY_E) and dialogue.has(interactObject) and len(dialogue[interactObject]) > 0:
 		reading = true
-	
-	if reading and $DiaCont/DialogueBox.reading == false:
-		if interactObject == "door":
-			pass
-		elif interactObject == "biohazard":
-			$DiaCont/DialogueBox.visible = true
-			$DiaCont/DialogueBox.start_reading(biohazard)
-		elif interactObject == "heartThing":
-			$DiaCont/DialogueBox.visible = true
-			$DiaCont/DialogueBox.start_reading(heartThing)
-		elif interactObject == "bed":
-			$DiaCont/DialogueBox.visible = true
-			$DiaCont/DialogueBox.start_reading(bed)
-		elif interactObject == "outlet":
-			$DiaCont/DialogueBox.visible = true
-			$DiaCont/DialogueBox.start_reading(outlet)
-			if $Inventory.visible == false:
-				$DiaCont/DialogueBox.start_reading(outlet.slice(0,2))
-			else:
-				$DiaCont/DialogueBox.start_reading(outlet.slice(0,3))
-		elif interactObject == "cart":
-			$DiaCont/DialogueBox.visible = true
-			if $Inventory.visible == false:
-				$DiaCont/DialogueBox.start_reading(cart)
-			else:
-				$DiaCont/DialogueBox.start_reading(cart.slice(0,2))
+		interact()
+		$Player.set_physics_process(false)
+
+
+func interact():
+	$DiaCont/DialogueBox.visible = true
+	if typeof(dialogue[interactObject]) == TYPE_ARRAY:
+		$DiaCont/DialogueBox.start_reading(dialogue[interactObject])
+	else: changeInteract(dialogue[interactObject].values().slice(0,1)[0][0], dialogue[interactObject].values().slice(0,1)[0][1])
+
+
+func changeInteract(range1, range2): # for dialogue changes after an item is picked
+	$DiaCont/DialogueBox.visible = true
+	if $Inventory.visible == false: $DiaCont/DialogueBox.start_reading(dialogue[interactObject].keys().slice(0,1)[0].slice(range1[0],range1[1]))
+	else: $DiaCont/DialogueBox.start_reading(dialogue[interactObject].keys().slice(0,1)[0].slice(range2[0],range2[1]))
 
 
 func _on_door_body_entered(body):
