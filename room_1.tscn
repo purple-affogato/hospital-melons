@@ -1,10 +1,72 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy301oahplc5l"]
+[gd_scene load_steps=17 format=3 uid="uid://cy301oahplc5l"]
 
 [ext_resource type="Script" path="res://room_1.gd" id="1_2f4aq"]
 [ext_resource type="Texture2D" uid="uid://cw563kpl5tidr" path="res://assets/backgrounds/room1-bg.png" id="1_ifqet"]
 [ext_resource type="PackedScene" uid="uid://cwypojrkdnrqo" path="res://laundry_machine.tscn" id="3_hww3j"]
 [ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="4_tdoma"]
 [ext_resource type="PackedScene" uid="uid://cxshv5n77pq6i" path="res://player.tscn" id="5_36dd3"]
+[ext_resource type="Texture2D" uid="uid://bm07fs26wfsxl" path="res://assets/items/detergent-spritemap.png" id="5_x0pgb"]
+[ext_resource type="Texture2D" uid="uid://de343kx88cdwd" path="res://assets/items/redpaint-plant-spritemap.png" id="6_ow3x6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgb7q"]
+atlas = ExtResource("6_ow3x6")
+region = Rect2(0, 0, 117, 188)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk57m"]
+atlas = ExtResource("6_ow3x6")
+region = Rect2(117, 0, 117, 188)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fjgml"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgb7q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk57m")
+}],
+"loop": true,
+"name": &"interact",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_agr6v"]
+size = Vector2(72, 460)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lrgn"]
+atlas = ExtResource("5_x0pgb")
+region = Rect2(0, 0, 79, 107)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hwyk"]
+atlas = ExtResource("5_x0pgb")
+region = Rect2(79, 0, 79, 107)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_55kmu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lrgn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hwyk")
+}],
+"loop": true,
+"name": &"interact",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qv0ty"]
+size = Vector2(80, 392)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xyo7"]
 size = Vector2(43, 620.5)
@@ -18,13 +80,33 @@ offset_bottom = 40.0
 texture = ExtResource("1_ifqet")
 
 [node name="LaundryMachine1" parent="." instance=ExtResource("3_hww3j")]
-position = Vector2(960, 320)
+position = Vector2(952, 320)
 
 [node name="LaundryMachine2" parent="." instance=ExtResource("3_hww3j")]
 position = Vector2(1576, 320)
 
+[node name="Plant" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Plant"]
+position = Vector2(1248, 184)
+sprite_frames = SubResource("SpriteFrames_fjgml")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plant"]
+position = Vector2(1244, 330)
+shape = SubResource("RectangleShape2D_agr6v")
+
+[node name="Detergent" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Detergent"]
+position = Vector2(1368, 224)
+sprite_frames = SubResource("SpriteFrames_55kmu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detergent"]
+position = Vector2(1368, 364)
+shape = SubResource("RectangleShape2D_qv0ty")
+
 [node name="CharacterBody2D" parent="." instance=ExtResource("5_36dd3")]
-position = Vector2(136, 308)
+position = Vector2(136, 352)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -49,3 +131,7 @@ shape = SubResource("RectangleShape2D_2xyo7")
 [connection signal="body_exited" from="LaundryMachine1" to="." method="_on_laundry_machine_1_body_exited"]
 [connection signal="body_entered" from="LaundryMachine2" to="." method="_on_laundry_machine_2_body_entered"]
 [connection signal="body_exited" from="LaundryMachine2" to="." method="_on_laundry_machine_2_body_exited"]
+[connection signal="body_entered" from="Plant" to="." method="_on_plant_body_entered"]
+[connection signal="body_exited" from="Plant" to="." method="_on_plant_body_exited"]
+[connection signal="body_entered" from="Detergent" to="." method="_on_detergent_body_entered"]
+[connection signal="body_exited" from="Detergent" to="." method="_on_detergent_body_exited"]

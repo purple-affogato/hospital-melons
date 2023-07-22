@@ -4,7 +4,7 @@ var reading = false
 var interactObject = "none"
 var dialogue_box
 var machine1_dialogue = ["A laundry machine.", "It seems very shiny inside."]
-var machine2_dialogue = ["A laundry machine", "Why does it have a magical aura?"]
+var machine2_dialogue = ["A laundry machine.", "Why does it have a magical aura?"]
 
 func _ready():
 	dialogue_box = $CanvasLayer/DialogueBox
@@ -29,10 +29,9 @@ func _on_laundry_machine_1_body_entered(body):
 	$LaundryMachine1/AnimatedSprite2D.play("interact")
 	interactObject = "machine1"
 
-
 func _on_laundry_machine_1_body_exited(body):
 	$LaundryMachine1/AnimatedSprite2D.play("default")
-
+	interactObject = "none"
 
 func _on_laundry_machine_2_body_entered(body):
 	$LaundryMachine2/AnimatedSprite2D.play("interact")
@@ -40,3 +39,21 @@ func _on_laundry_machine_2_body_entered(body):
 	
 func _on_laundry_machine_2_body_exited(body):
 	$LaundryMachine2/AnimatedSprite2D.play("default")
+	interactObject = "none"
+
+func _on_plant_body_entered(body):
+	$Plant/AnimatedSprite2D.play("interact")
+	interactObject = "plant"
+
+func _on_plant_body_exited(body):
+	$Plant/AnimatedSprite2D.play("default")
+	interactObject = "none"
+
+func _on_detergent_body_entered(body):
+	$Detergent/AnimatedSprite2D.play("interact")
+	interactObject = "detergent"
+	
+
+func _on_detergent_body_exited(body):
+	$Detergent/AnimatedSprite2D.play("default")
+	interactObject = "none"
