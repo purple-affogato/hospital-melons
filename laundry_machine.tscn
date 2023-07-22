@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ciw0hoku0mdc5" path="res://assets/items/laundry-machine-spritemap.png" id="1_ilxwq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wiqvp"]
-size = Vector2(162, 355)
+size = Vector2(162, 320)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s8ux8"]
 atlas = ExtResource("1_ilxwq")
@@ -54,7 +54,7 @@ animations = [{
 [node name="LaundryMachine" type="Area2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 63.5)
+position = Vector2(-1, 46)
 shape = SubResource("RectangleShape2D_wiqvp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
