@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cw563kpl5tidr" path="res://assets/backgrounds/room1-bg.png" id="1_ifqet"]
 [ext_resource type="PackedScene" uid="uid://cwypojrkdnrqo" path="res://laundry_machine.tscn" id="3_hww3j"]
 [ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="4_tdoma"]
-[ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="5_36dd3"]
+[ext_resource type="PackedScene" uid="uid://cxshv5n77pq6i" path="res://player.tscn" id="5_36dd3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xyo7"]
 size = Vector2(43, 620.5)
@@ -18,14 +18,22 @@ offset_bottom = 40.0
 texture = ExtResource("1_ifqet")
 
 [node name="LaundryMachine1" parent="." instance=ExtResource("3_hww3j")]
-position = Vector2(503, 187)
+position = Vector2(960, 320)
+
+[node name="LaundryMachine2" parent="." instance=ExtResource("3_hww3j")]
+position = Vector2(1576, 320)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("5_36dd3")]
-position = Vector2(116, 273)
+position = Vector2(136, 308)
 
-[node name="DialogueBox" parent="." instance=ExtResource("4_tdoma")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" parent="CanvasLayer" instance=ExtResource("4_tdoma")]
 visible = false
-position = Vector2(24, 357)
+offset_left = 27.0
+offset_top = 363.0
+offset_right = 27.0
+offset_bottom = 363.0
 
 [node name="walls" type="StaticBody2D" parent="."]
 
@@ -34,8 +42,10 @@ position = Vector2(-23, 298)
 shape = SubResource("RectangleShape2D_2xyo7")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
-position = Vector2(1044, 297)
+position = Vector2(2070, 305)
 shape = SubResource("RectangleShape2D_2xyo7")
 
 [connection signal="body_entered" from="LaundryMachine1" to="." method="_on_laundry_machine_1_body_entered"]
 [connection signal="body_exited" from="LaundryMachine1" to="." method="_on_laundry_machine_1_body_exited"]
+[connection signal="body_entered" from="LaundryMachine2" to="." method="_on_laundry_machine_2_body_entered"]
+[connection signal="body_exited" from="LaundryMachine2" to="." method="_on_laundry_machine_2_body_exited"]
