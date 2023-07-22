@@ -3,19 +3,23 @@
 [ext_resource type="Script" path="res://dialogue_box.gd" id="1_8u3lv"]
 [ext_resource type="Texture2D" uid="uid://x1h30hcjbrno" path="res://assets/items/dialogue-box.png" id="1_qebp0"]
 
-[node name="DialogueBox" type="Node2D"]
+[node name="DialogueBox" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_8u3lv")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_qebp0")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 19.0
 offset_top = 20.0
 offset_right = 954.0
 offset_bottom = 161.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 0
+theme_override_font_sizes/normal_font_size = 20
 text = "(empty)"
