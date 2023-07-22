@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dmigj6t4jd3de"]
+[gd_scene load_steps=21 format=3 uid="uid://dmigj6t4jd3de"]
 
 [ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="1_ak4e3"]
 [ext_resource type="Script" path="res://room2.gd" id="1_f5fp5"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bhdefhcabmrpr" path="res://assets/items/bed.png" id="7_8fcgx"]
 [ext_resource type="Texture2D" uid="uid://m52bm0pdbgle" path="res://assets/items/outlet.png" id="8_5i0ps"]
 [ext_resource type="Texture2D" uid="uid://dvaie2dri5r0x" path="res://assets/items/cart.png" id="9_eqgf4"]
+[ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="10_gj6tw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mw4st"]
 size = Vector2(2058, 7)
@@ -46,7 +47,7 @@ position = Vector2(1024, 300)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_dgnlw")
 
-[node name="Control" type="Control" parent="."]
+[node name="heartLine" type="Control" parent="."]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
@@ -55,7 +56,7 @@ offset_top = 205.0
 offset_right = 889.0
 offset_bottom = 285.0
 
-[node name="heart line" type="Sprite2D" parent="Control"]
+[node name="heart line" type="Sprite2D" parent="heartLine"]
 position = Vector2(-379, 50)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_nxcmd")
@@ -74,8 +75,6 @@ shape = SubResource("RectangleShape2D_trm3w")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2052, 300)
 shape = SubResource("RectangleShape2D_gtaff")
-
-[node name="Node2D" parent="." instance=ExtResource("5_87uyv")]
 
 [node name="door" type="Area2D" parent="."]
 
@@ -150,6 +149,13 @@ centered = false
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_ak4e3")]
 position = Vector2(304, 464)
+
+[node name="Inventory" parent="." instance=ExtResource("5_87uyv")]
+
+[node name="DiaCont" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" parent="DiaCont" instance=ExtResource("10_gj6tw")]
+visible = false
 
 [connection signal="body_entered" from="door" to="." method="_on_door_body_entered"]
 [connection signal="body_exited" from="door" to="." method="_on_door_body_exited"]
