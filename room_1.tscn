@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cy301oahplc5l"]
+[gd_scene load_steps=7 format=3 uid="uid://cy301oahplc5l"]
 
 [ext_resource type="Script" path="res://room_1.gd" id="1_2f4aq"]
 [ext_resource type="Texture2D" uid="uid://cw563kpl5tidr" path="res://assets/backgrounds/room1-bg.png" id="1_ifqet"]
 [ext_resource type="PackedScene" uid="uid://cwypojrkdnrqo" path="res://laundry_machine.tscn" id="3_hww3j"]
 [ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="4_tdoma"]
+[ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="5_36dd3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xyo7"]
+size = Vector2(43, 620.5)
 
 [node name="Room1" type="Node2D"]
 script = ExtResource("1_2f4aq")
@@ -13,7 +17,22 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_ifqet")
 
-[node name="LaundryMachine" parent="." instance=ExtResource("3_hww3j")]
-position = Vector2(414, 127)
+[node name="LaundryMachine1" parent="." instance=ExtResource("3_hww3j")]
+position = Vector2(503, 187)
 
 [node name="DialogueBox" parent="." instance=ExtResource("4_tdoma")]
+visible = false
+position = Vector2(24, 357)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("5_36dd3")]
+position = Vector2(116, 273)
+
+[node name="walls" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
+position = Vector2(-23, 298)
+shape = SubResource("RectangleShape2D_2xyo7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
+position = Vector2(1044, 297)
+shape = SubResource("RectangleShape2D_2xyo7")

@@ -1,17 +1,54 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmigj6t4jd3de"]
+[gd_scene load_steps=8 format=3 uid="uid://dmigj6t4jd3de"]
 
 [ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="1_ak4e3"]
+[ext_resource type="Texture2D" uid="uid://btx07qvmncee4" path="res://assets/backgrounds/room2-bg.png" id="2_dgnlw"]
+[ext_resource type="Texture2D" uid="uid://ytg4rgyv56jn" path="res://assets/items/heart-line.png" id="2_nxcmd"]
+[ext_resource type="Script" path="res://heart line.gd" id="3_2314g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mw4st"]
-size = Vector2(937, 20)
+size = Vector2(2058, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trm3w"]
+size = Vector2(10, 610)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtaff"]
+size = Vector2(8, 600)
 
 [node name="Node2D" type="Node2D"]
+
+[node name="bg" type="Sprite2D" parent="."]
+position = Vector2(1024, 300)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_dgnlw")
+
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 759.0
+offset_top = 205.0
+offset_right = 889.0
+offset_bottom = 285.0
+
+[node name="heart line" type="Sprite2D" parent="Control"]
+position = Vector2(-379, 50)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_nxcmd")
+script = ExtResource("3_2314g")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(525, 589)
+position = Vector2(1024, 595.5)
 shape = SubResource("RectangleShape2D_mw4st")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-5, 295)
+shape = SubResource("RectangleShape2D_trm3w")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2052, 300)
+shape = SubResource("RectangleShape2D_gtaff")
+
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_ak4e3")]
-position = Vector2(212, 451)
+position = Vector2(304, 464)
