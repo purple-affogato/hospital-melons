@@ -8,14 +8,15 @@ var reading = false
 func _process(delta):
 	print(InputEventKey)
 	if reading == true and Input.is_action_just_released("enter"): # this is how you check for the enter key
-		if idx == len(dialogue):
+		if idx+1 == len(dialogue):
 			reading = false
 			visible = false
 		else:
-			label.text = dialogue[idx]
 			idx += 1
+			label.text = dialogue[idx]
 
 func start_reading(array):
 	dialogue = array
 	idx = 0
+	label.text = dialogue[idx]
 	reading = true
