@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cw563kpl5tidr" path="res://assets/backgrounds/room1-bg.png" id="1_ifqet"]
 [ext_resource type="PackedScene" uid="uid://cwypojrkdnrqo" path="res://laundry_machine.tscn" id="3_hww3j"]
 [ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="4_tdoma"]
-[ext_resource type="PackedScene" path="res://player.tscn" id="5_36dd3"]
+[ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="5_36dd3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xyo7"]
 size = Vector2(43, 620.5)

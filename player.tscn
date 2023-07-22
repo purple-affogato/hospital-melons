@@ -57,7 +57,7 @@ script = ExtResource("1_ky3n3")
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_gfyhi")
 animation = &"walk"
-frame_progress = 0.128028
+frame_progress = 0.159669
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 2)
