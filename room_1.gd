@@ -9,8 +9,9 @@ func _ready():
 
 func _process(delta):
 	if reading == true:
-		pass
-	elif Input.is_key_pressed(KEY_E):
+		return
+	if Input.is_key_pressed(KEY_E):
+		reading = true
 		if interactObject == "machine1":
 			$DialogueBox.visible = true
 			$DialogueBox.start_reading(machine1_dialogue)
