@@ -27,7 +27,7 @@ func _process(delta):
 			reading = true
 			dialogue_box.visible = true
 			dialogue_box.start_reading(dialogue[interactObject])
-			get_node("Player").set_physics_process(false)
+			$Player.set_physics_process(false)
 
 func _on_laundry_machine_1_body_entered(body):
 	$LaundryMachine1/AnimatedSprite2D.play("interact")
