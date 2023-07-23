@@ -144,7 +144,7 @@ func handle_item_switch():
 			$LaundryMachine2/AnimatedSprite2D.play("portal interact")
 			interactObject = "machine2-portal"
 		elif interactObject == "machine2-portal":
-			get_tree().change_scene_to_file("res://room2.tscn")
+			get_tree().change_scene_to_file("res://room2Safe.tscn")
 	else:
 		if interactObject == "detergent":
 			inventory.visible = false

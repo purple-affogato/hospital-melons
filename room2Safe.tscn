@@ -1,58 +1,58 @@
-[gd_scene load_steps=42 format=3 uid="uid://dmigj6t4jd3de"]
+[gd_scene load_steps=42 format=3 uid="uid://s5vjqrogrji8"]
 
-[ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="1_ak4e3"]
-[ext_resource type="Script" path="res://room2.gd" id="1_f5fp5"]
-[ext_resource type="Texture2D" uid="uid://btx07qvmncee4" path="res://assets/backgrounds/room2-bg.png" id="2_dgnlw"]
-[ext_resource type="Texture2D" uid="uid://ytg4rgyv56jn" path="res://assets/items/heart-line.png" id="2_nxcmd"]
-[ext_resource type="Script" path="res://heart line.gd" id="3_2314g"]
-[ext_resource type="Texture2D" uid="uid://dftb3yagxushi" path="res://assets/backgrounds/scissors2.png" id="4_vlst0"]
-[ext_resource type="PackedScene" uid="uid://c8yfccrywl1w8" path="res://inventory.tscn" id="5_87uyv"]
-[ext_resource type="Texture2D" uid="uid://bwc546lcms3lm" path="res://assets/items/heartThing.png" id="6_ielvq"]
-[ext_resource type="Texture2D" uid="uid://bhdefhcabmrpr" path="res://assets/items/bed.png" id="7_8fcgx"]
-[ext_resource type="Texture2D" uid="uid://m52bm0pdbgle" path="res://assets/items/outlet.png" id="8_5i0ps"]
-[ext_resource type="Texture2D" uid="uid://dvaie2dri5r0x" path="res://assets/items/cart.png" id="9_eqgf4"]
-[ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="10_gj6tw"]
-[ext_resource type="Script" path="res://code.gd" id="12_3h38f"]
-[ext_resource type="Texture2D" uid="uid://c5moqrtd6k1h1" path="res://assets/items/x.png" id="12_qgwt5"]
-[ext_resource type="Texture2D" uid="uid://dde8wnraoc1by" path="res://assets/backgrounds/beacon.png" id="14_stkog"]
-[ext_resource type="Shader" path="res://shaders/room2.gdshader" id="16_tvreb"]
-[ext_resource type="AudioStream" uid="uid://btiyw8su57yv8" path="res://assets/audio/r2.ogg" id="17_5vr8j"]
-[ext_resource type="AudioStream" uid="uid://dic84l4ql5vqd" path="res://assets/audio/Stayin_-Lazy-Godmode.wav" id="18_4qqml"]
+[ext_resource type="Script" path="res://room2Safe.gd" id="1_rry5q"]
+[ext_resource type="Texture2D" uid="uid://btx07qvmncee4" path="res://assets/backgrounds/room2-bg.png" id="2_d5dd5"]
+[ext_resource type="Texture2D" uid="uid://dde8wnraoc1by" path="res://assets/backgrounds/beacon.png" id="3_4ln1q"]
+[ext_resource type="Texture2D" uid="uid://ytg4rgyv56jn" path="res://assets/items/heart-line.png" id="4_bxo70"]
+[ext_resource type="Script" path="res://heart line.gd" id="5_llnuk"]
+[ext_resource type="Texture2D" uid="uid://bwc546lcms3lm" path="res://assets/items/heartThing.png" id="6_6gxfk"]
+[ext_resource type="Texture2D" uid="uid://bhdefhcabmrpr" path="res://assets/items/bed.png" id="7_qm2lq"]
+[ext_resource type="Texture2D" uid="uid://m52bm0pdbgle" path="res://assets/items/outlet.png" id="8_7pcs2"]
+[ext_resource type="Texture2D" uid="uid://dvaie2dri5r0x" path="res://assets/items/cart.png" id="9_g3jkf"]
+[ext_resource type="Texture2D" uid="uid://dftb3yagxushi" path="res://assets/backgrounds/scissors2.png" id="10_etngq"]
+[ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="11_r4q4q"]
+[ext_resource type="Shader" path="res://shaders/room2.gdshader" id="12_1qgay"]
+[ext_resource type="PackedScene" uid="uid://c8yfccrywl1w8" path="res://inventory.tscn" id="13_11yy6"]
+[ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="14_kujup"]
+[ext_resource type="Script" path="res://code.gd" id="15_7vfgg"]
+[ext_resource type="Texture2D" uid="uid://c5moqrtd6k1h1" path="res://assets/items/x.png" id="16_juixv"]
+[ext_resource type="AudioStream" uid="uid://btiyw8su57yv8" path="res://assets/audio/r2.ogg" id="17_tj3tp"]
+[ext_resource type="AudioStream" uid="uid://dic84l4ql5vqd" path="res://assets/audio/Stayin_-Lazy-Godmode.wav" id="18_h43pj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rymoi"]
-atlas = ExtResource("14_stkog")
+atlas = ExtResource("3_4ln1q")
 region = Rect2(8192, 1200, 4096, 1200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_omcxi"]
-atlas = ExtResource("14_stkog")
+atlas = ExtResource("3_4ln1q")
 region = Rect2(12288, 1200, 4096, 1200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gesay"]
-atlas = ExtResource("14_stkog")
+atlas = ExtResource("3_4ln1q")
 region = Rect2(0, 2400, 4096, 1200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mbrwq"]
-atlas = ExtResource("14_stkog")
+atlas = ExtResource("3_4ln1q")
 region = Rect2(0, 0, 4096, 1200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yca2d"]
-atlas = ExtResource("14_stkog")
+atlas = ExtResource("3_4ln1q")
 region = Rect2(4096, 0, 4096, 1200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_prl62"]
-atlas = ExtResource("14_stkog")
+atlas = ExtResource("3_4ln1q")
 region = Rect2(8192, 0, 4096, 1200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x81uv"]
-atlas = ExtResource("14_stkog")
+atlas = ExtResource("3_4ln1q")
 region = Rect2(12288, 0, 4096, 1200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fp32s"]
-atlas = ExtResource("14_stkog")
+atlas = ExtResource("3_4ln1q")
 region = Rect2(0, 1200, 4096, 1200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xb08v"]
-atlas = ExtResource("14_stkog")
+atlas = ExtResource("3_4ln1q")
 region = Rect2(4096, 1200, 4096, 1200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q28a3"]
@@ -126,7 +126,7 @@ size = Vector2(99, 115)
 size = Vector2(183, 135)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hmgk6"]
-shader = ExtResource("16_tvreb")
+shader = ExtResource("12_1qgay")
 shader_parameter/overlay = true
 shader_parameter/scanlines_opacity = 0.1
 shader_parameter/scanlines_width = 0.0
@@ -154,12 +154,12 @@ shader_parameter/vignette_opacity = 0.5
 [sub_resource type="Theme" id="Theme_muivg"]
 
 [node name="Node2D2" type="Node2D"]
-script = ExtResource("1_f5fp5")
+script = ExtResource("1_rry5q")
 
 [node name="bg" type="Sprite2D" parent="."]
 position = Vector2(1024, 300)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_dgnlw")
+texture = ExtResource("2_d5dd5")
 
 [node name="beacon" type="Area2D" parent="."]
 position = Vector2(-4, 0)
@@ -185,8 +185,8 @@ offset_bottom = 285.0
 [node name="heart line" type="Sprite2D" parent="heartLine"]
 position = Vector2(-379, 50)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_nxcmd")
-script = ExtResource("3_2314g")
+texture = ExtResource("4_bxo70")
+script = ExtResource("5_llnuk")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -237,7 +237,7 @@ shape = SubResource("RectangleShape2D_a4r5b")
 
 [node name="Sprite2D" type="Sprite2D" parent="heartThing"]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_ielvq")
+texture = ExtResource("6_6gxfk")
 centered = false
 
 [node name="bed" type="Area2D" parent="."]
@@ -248,7 +248,7 @@ shape = SubResource("RectangleShape2D_4cs4t")
 
 [node name="Sprite2D" type="Sprite2D" parent="bed"]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_8fcgx")
+texture = ExtResource("7_qm2lq")
 centered = false
 
 [node name="outlet" type="Area2D" parent="."]
@@ -259,7 +259,7 @@ shape = SubResource("RectangleShape2D_ub680")
 
 [node name="Sprite2D" type="Sprite2D" parent="outlet"]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_5i0ps")
+texture = ExtResource("8_7pcs2")
 centered = false
 
 [node name="cart" type="Area2D" parent="."]
@@ -270,15 +270,15 @@ shape = SubResource("RectangleShape2D_p15ep")
 
 [node name="Sprite2D" type="Sprite2D" parent="cart"]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_eqgf4")
+texture = ExtResource("9_g3jkf")
 centered = false
 
 [node name="scissors" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_vlst0")
+texture = ExtResource("10_etngq")
 centered = false
 
-[node name="Player" parent="." instance=ExtResource("1_ak4e3")]
+[node name="Player" parent="." instance=ExtResource("11_r4q4q")]
 position = Vector2(304, 464)
 
 [node name="radio" type="AudioStreamPlayer2D" parent="."]
@@ -290,11 +290,11 @@ material = SubResource("ShaderMaterial_hmgk6")
 offset_right = 1026.0
 offset_bottom = 606.0
 
-[node name="Inventory" parent="." instance=ExtResource("5_87uyv")]
+[node name="Inventory" parent="." instance=ExtResource("13_11yy6")]
 
 [node name="DiaCont" type="CanvasLayer" parent="."]
 
-[node name="DialogueBox" parent="DiaCont" instance=ExtResource("10_gj6tw")]
+[node name="DialogueBox" parent="DiaCont" instance=ExtResource("14_kujup")]
 visible = false
 offset_left = 21.0
 offset_top = 19.0
@@ -302,7 +302,7 @@ offset_right = 21.0
 offset_bottom = 19.0
 
 [node name="code" type="CanvasLayer" parent="."]
-script = ExtResource("12_3h38f")
+script = ExtResource("15_7vfgg")
 
 [node name="bg" type="ColorRect" parent="code"]
 offset_left = 192.0
@@ -390,14 +390,14 @@ text = "[center]0"
 
 [node name="Sprite2D" type="Sprite2D" parent="code"]
 position = Vector2(720, 165)
-texture = ExtResource("12_qgwt5")
+texture = ExtResource("16_juixv")
 
 [node name="ambiance" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("17_5vr8j")
+stream = ExtResource("17_tj3tp")
 autoplay = true
 
 [node name="bg music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("18_4qqml")
+stream = ExtResource("18_h43pj")
 volume_db = -8.432
 autoplay = true
 
