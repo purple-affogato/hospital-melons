@@ -54,7 +54,14 @@ var dialogue = {
 		["Usually, you would put laundry detergent in a laundry machine to make your clothes crispy clean.",
 		"But we don't do that in this household.",
 		"You feel an invisible force pushing the laundry detergent away.",
-		"Such a rebellious laundry machine."]
+		"Such a rebellious laundry machine."],
+	"rack" :
+		["A laundry rack.",
+		"On it hangs bright white lab coats.",
+		"A rather inaccurate representation of the underlying nature of this hospital."],
+	"rack-detergent" :
+		["Pouring laundry detergent directly on these lab coats won't clean them.",
+		"At least use a laundry machine."]
 	}
 
 func _ready():
@@ -66,7 +73,7 @@ func _process(delta):
 	handle_inventory()
 	if reading:
 		if dialogue_box.visible == true:
-			return
+			handle_sfx()
 		else:
 			handle_item_switch()
 			reading = false
@@ -88,6 +95,8 @@ func handle_item_interaction():
 			step1_cleared = true
 		elif (interactObject == "machine1" or interactObject == "machine2") and inventory.item == "detergent":
 			dialogue_box.start_reading(dialogue["machines-detergent"])
+		elif interactObject == "rack" and inventory.item == "detergent":
+			dialogue_box.start_reading(dialogue["rack-detergent"])
 		else:
 			dialogue_box.start_reading(dialogue[interactObject])
 	
@@ -132,6 +141,18 @@ func handle_item_switch():
 			inventory.visible = false
 			inventory.addItem("res://assets/items/plant-item.png", "plant")
 	handle_inventory()
+
+# handles sfx based on which line of dialogue is being read. calling when reading = true
+func handle_sfx():
+	var text = dialogue_box.get_node("RichTextLabel").text
+	if text == dialogue["step2"][2]:
+		$Radio.position = $LaundryMachine2.position
+		$Radio.stream = load("res://assets/audio/whoosh.wav")
+		$Radio.play()
+	elif text == dialogue["step1"][5]:
+		$Radio.position = $Toothbrush/CollisionShape2D.position
+		$Radio.stream = load("res://assets/audio/creaking.ogg")
+		$Radio.play()
 
 # handles which items are visible based on the inventory
 func handle_inventory():
@@ -197,4 +218,12 @@ func _on_toothbrush_body_entered(body):
 
 func _on_toothbrush_body_exited(body):
 	$Toothbrush/ColorRect.visible = false
+	interactObject = "none"
+
+func _on_laundry_rack_body_entered(body):
+	$LaundryRack/AnimatedSprite2D.play("interact")
+	interactObject = "rack"
+
+func _on_laundry_rack_body_exited(body):
+	$LaundryRack/AnimatedSprite2D.play("default")
 	interactObject = "none"

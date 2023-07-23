@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cy301oahplc5l"]
+[gd_scene load_steps=25 format=3 uid="uid://cy301oahplc5l"]
 
 [ext_resource type="Script" path="res://room_1.gd" id="1_2f4aq"]
 [ext_resource type="Texture2D" uid="uid://cw563kpl5tidr" path="res://assets/backgrounds/room1-bg.png" id="1_ifqet"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bprdc4usonu15" path="res://assets/items/toothpaste-trapdoor.png" id="6_awv2q"]
 [ext_resource type="Texture2D" uid="uid://de343kx88cdwd" path="res://assets/items/redpaint-plant-spritemap.png" id="6_ow3x6"]
 [ext_resource type="PackedScene" uid="uid://cy3huqhhicuce" path="res://inventory.tscn" id="8_nl6sp"]
+[ext_resource type="Texture2D" uid="uid://cxyycvhmbb565" path="res://assets/items/laundry-rack.png" id="10_bert6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dgb7q"]
 atlas = ExtResource("6_ow3x6")
@@ -73,6 +74,36 @@ size = Vector2(80, 392)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcqce"]
 size = Vector2(332.5, 450.5)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlfmw"]
+atlas = ExtResource("10_bert6")
+region = Rect2(0, 0, 391, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pldop"]
+atlas = ExtResource("10_bert6")
+region = Rect2(391, 0, 391, 411)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lxxnn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlfmw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pldop")
+}],
+"loop": true,
+"name": &"interact",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_llj3h"]
+size = Vector2(301, 365)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xyo7"]
 size = Vector2(52.75, 620.5)
 
@@ -85,10 +116,10 @@ offset_bottom = 40.0
 texture = ExtResource("1_ifqet")
 
 [node name="LaundryMachine1" parent="." instance=ExtResource("3_hww3j")]
-position = Vector2(792, 368)
+position = Vector2(808, 360)
 
 [node name="LaundryMachine2" parent="." instance=ExtResource("3_hww3j")]
-position = Vector2(1048, 368)
+position = Vector2(1056, 360)
 
 [node name="Plant" type="Area2D" parent="."]
 
@@ -129,8 +160,19 @@ color = Color(0.823529, 0.286275, 0.305882, 0.615686)
 position = Vector2(1754.75, 337.75)
 shape = SubResource("RectangleShape2D_bcqce")
 
+[node name="LaundryRack" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="LaundryRack"]
+position = Vector2(456, 312)
+scale = Vector2(0.898977, 0.906326)
+sprite_frames = SubResource("SpriteFrames_lxxnn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaundryRack"]
+position = Vector2(465.5, 313.5)
+shape = SubResource("RectangleShape2D_llj3h")
+
 [node name="Player" parent="." instance=ExtResource("5_36dd3")]
-position = Vector2(122, 424)
+position = Vector2(89, 425)
 
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
 
@@ -148,11 +190,14 @@ position = Vector2(-6.75, 296)
 shape = SubResource("RectangleShape2D_2xyo7")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
-position = Vector2(2061.38, 307)
+position = Vector2(2055, 298)
 shape = SubResource("RectangleShape2D_2xyo7")
 
 [node name="Inventory" parent="." instance=ExtResource("8_nl6sp")]
 visible = false
+
+[node name="Radio" type="AudioStreamPlayer2D" parent="."]
+volume_db = 16.0
 
 [connection signal="body_entered" from="LaundryMachine1" to="." method="_on_laundry_machine_1_body_entered"]
 [connection signal="body_exited" from="LaundryMachine1" to="." method="_on_laundry_machine_1_body_exited"]
@@ -164,3 +209,5 @@ visible = false
 [connection signal="body_exited" from="Detergent" to="." method="_on_detergent_body_exited"]
 [connection signal="body_entered" from="Toothbrush" to="." method="_on_toothbrush_body_entered"]
 [connection signal="body_exited" from="Toothbrush" to="." method="_on_toothbrush_body_exited"]
+[connection signal="body_entered" from="LaundryRack" to="." method="_on_laundry_rack_body_entered"]
+[connection signal="body_exited" from="LaundryRack" to="." method="_on_laundry_rack_body_exited"]

@@ -5,13 +5,13 @@ var dialogue = []
 var idx = 0
 var reading = false
 
-func _process(delta):
-	if reading == true and Input.is_action_just_released("enter"): # this is how you check for the enter key
-		if idx+1 == len(dialogue):
+func _process(_delta):
+	if reading == true and Input.is_action_just_released("enter"):
+		idx += 1
+		if idx == len(dialogue):
 			reading = false
 			visible = false
 		else:
-			idx += 1
 			label.text = dialogue[idx]
 
 func start_reading(array):
