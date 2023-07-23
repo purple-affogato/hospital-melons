@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhkixeiqri0st"]
+
+[ext_resource type="Script" path="res://instructions.gd" id="1_62mv5"]
+[ext_resource type="Texture2D" uid="uid://mq3sdmv1pm74" path="res://assets/backgrounds/instructions-bg.png" id="1_luuob"]
+
+[node name="Instructions" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_62mv5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_luuob")
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 114.0
+offset_right = 874.0
+offset_bottom = 171.0
+theme_override_colors/default_color = Color(0.780392, 0.25098, 0.721569, 1)
+theme_override_font_sizes/normal_font_size = 40
+text = "(Title)"
+fit_content = true
+
+[node name="Description" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 179.0
+offset_right = 931.0
+offset_bottom = 506.0
+theme_override_colors/default_color = Color(0.960784, 0.517647, 0.976471, 1)
+theme_override_font_sizes/normal_font_size = 25
+text = "description"
