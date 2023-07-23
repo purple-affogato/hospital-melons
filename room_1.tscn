@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cw563kpl5tidr" path="res://assets/backgrounds/room1-bg.png" id="1_ifqet"]
 [ext_resource type="PackedScene" uid="uid://cwypojrkdnrqo" path="res://laundry_machine.tscn" id="3_hww3j"]
 [ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="4_tdoma"]
-[ext_resource type="PackedScene" uid="uid://cxshv5n77pq6i" path="res://player.tscn" id="5_36dd3"]
+[ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="5_36dd3"]
 [ext_resource type="Texture2D" uid="uid://bm07fs26wfsxl" path="res://assets/items/detergent-spritemap.png" id="5_x0pgb"]
 [ext_resource type="Texture2D" uid="uid://de343kx88cdwd" path="res://assets/items/redpaint-plant-spritemap.png" id="6_ow3x6"]
 

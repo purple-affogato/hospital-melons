@@ -3,6 +3,7 @@ extends Node2D
 var interactObject = ""
 
 var dialogue = {
+	"beacon" : [],
 	"code" : [],
 	"door" : [],
 	"heartLine" : [],
@@ -33,7 +34,9 @@ func _process(delta):
 		$Player.set_physics_process(true)
 	
 	if Input.is_key_pressed(KEY_E) and interactObject != "":
-		if dialogue.has(interactObject) and len(dialogue[interactObject]) > 0:
+		if interactObject == "biohazard" and $code.win:
+			print("YOU WINNNNNNNNNNNN")
+		elif dialogue.has(interactObject) and len(dialogue[interactObject]) > 0:
 			reading = true
 			interact()
 		elif interactObject == "door": code()
@@ -42,6 +45,12 @@ func _process(delta):
 	if $code.visible and Input.is_key_pressed(KEY_X):
 		$code.visible = false
 		$Player.set_physics_process(true)
+	
+	if $code.win == true and !$beacon.visible:
+		$beacon.visible = true
+		$beacon/animated.play("start")
+		await get_tree().create_timer(0.2).timeout 
+		$beacon/animated.play("default")
 
 
 func code():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dmigj6t4jd3de"]
+[gd_scene load_steps=37 format=3 uid="uid://dmigj6t4jd3de"]
 
 [ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="1_ak4e3"]
 [ext_resource type="Script" path="res://room2.gd" id="1_f5fp5"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="10_gj6tw"]
 [ext_resource type="Script" path="res://code.gd" id="12_3h38f"]
 [ext_resource type="Texture2D" uid="uid://c5moqrtd6k1h1" path="res://assets/items/x.png" id="12_qgwt5"]
+[ext_resource type="Texture2D" uid="uid://dde8wnraoc1by" path="res://assets/backgrounds/beacon.png" id="14_stkog"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mw4st"]
 size = Vector2(2058, 7)
@@ -44,6 +45,85 @@ size = Vector2(183, 135)
 [sub_resource type="Theme" id="Theme_t30py"]
 
 [sub_resource type="Theme" id="Theme_muivg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rymoi"]
+atlas = ExtResource("14_stkog")
+region = Rect2(8192, 1200, 4096, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omcxi"]
+atlas = ExtResource("14_stkog")
+region = Rect2(12288, 1200, 4096, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gesay"]
+atlas = ExtResource("14_stkog")
+region = Rect2(0, 2400, 4096, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbrwq"]
+atlas = ExtResource("14_stkog")
+region = Rect2(0, 0, 4096, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yca2d"]
+atlas = ExtResource("14_stkog")
+region = Rect2(4096, 0, 4096, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prl62"]
+atlas = ExtResource("14_stkog")
+region = Rect2(8192, 0, 4096, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x81uv"]
+atlas = ExtResource("14_stkog")
+region = Rect2(12288, 0, 4096, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fp32s"]
+atlas = ExtResource("14_stkog")
+region = Rect2(0, 1200, 4096, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb08v"]
+atlas = ExtResource("14_stkog")
+region = Rect2(4096, 1200, 4096, 1200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q28a3"]
+animations = [{
+"frames": [{
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_rymoi")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_omcxi")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_gesay")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_mbrwq")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_yca2d")
+}, {
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_prl62")
+}, {
+"duration": 0.4,
+"texture": SubResource("AtlasTexture_x81uv")
+}, {
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_fp32s")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_xb08v")
+}],
+"loop": false,
+"name": &"start",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xm6lq"]
+size = Vector2(90, 702)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_f5fp5")
@@ -253,6 +333,18 @@ text = "[center]0"
 [node name="Sprite2D" type="Sprite2D" parent="code"]
 position = Vector2(720, 165)
 texture = ExtResource("12_qgwt5")
+
+[node name="beacon" type="Area2D" parent="."]
+position = Vector2(-4, 0)
+scale = Vector2(0.5, 0.5)
+
+[node name="animated" type="AnimatedSprite2D" parent="beacon"]
+sprite_frames = SubResource("SpriteFrames_q28a3")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="beacon"]
+position = Vector2(225, 425)
+shape = SubResource("RectangleShape2D_xm6lq")
 
 [connection signal="body_entered" from="door" to="." method="_on_door_body_entered"]
 [connection signal="body_exited" from="door" to="." method="_on_door_body_exited"]
