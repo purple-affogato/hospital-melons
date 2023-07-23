@@ -7,9 +7,9 @@ var dialogue = {
 	"code" : [],
 	"door" : [],
 	"heartLine" : [],
-	"biohazard" : ["A biohazard container", "I don't think biological waste is supposed to glow green"],
-	"heartThing" : [["A heart monitor", "It's not working..."], ["A heart monitor", "Hehe I fixed it"]],
-	"bed" : ["A bed", "It looks very uncomfy", "Good thing I'm not tired"],
+	"biohazard" : [["A biohazard container", "I don't think biological waste is supposed to glow green"], ["No, I can assure you the scissors aren't a biohazard"]],
+	"heartThing" : [["A heart monitor", "It's not working..."], ["A heart monitor", "Hehe I fixed it"], ["A heart monitor", "It's already broken, no need to break it some more"]],
+	"bed" : [["A bed", "It looks very uncomfy", "Good thing I'm not tired"], ["A bed", "What do you think you're doing, trying to cut up the bed?", "Clearly you need larger scissors for that"]],
 	"outlet" : [["A broken wire, looks like it's for the heart monitor", "... looks dangerous", "Oh, what if I stuff the scissors into here!"], ["A broken wire, looks like it's for the heart monitor", "Still looks dangerous",]],
 	"cart" : ["A surgical cart", "Not much equipment on it, what a cheap hospital", "Oo but there are scissors!"]
 }
@@ -88,6 +88,7 @@ func interact():
 	$DiaCont/DialogueBox.visible = true
 	if interactObject == "heartThing":
 		if $heartLine.visible: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][1])
+		elif $Inventory.visible: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][2])
 		else: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][0])
 	elif interactObject == "outlet":
 		if $heartLine.visible: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][1])
@@ -96,6 +97,12 @@ func interact():
 	elif interactObject == "cart":
 		if $scissors.visible and !$heartLine.visible: changeInteract(0,3)
 		else: changeInteract(0,2)
+	elif interactObject == "biohazard":
+		if $Inventory.visible: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][1])
+		else: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][0])
+	elif interactObject == "bed":
+		if $Inventory.visible: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][1])
+		else: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][0])
 	elif typeof(dialogue[interactObject]) == TYPE_ARRAY:
 		$DiaCont/DialogueBox.start_reading(dialogue[interactObject])
 
