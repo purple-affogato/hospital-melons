@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dmigj6t4jd3de"]
+[gd_scene load_steps=42 format=3 uid="uid://dmigj6t4jd3de"]
 
 [ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="1_ak4e3"]
 [ext_resource type="Script" path="res://room2.gd" id="1_f5fp5"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://c5moqrtd6k1h1" path="res://assets/items/x.png" id="12_qgwt5"]
 [ext_resource type="Texture2D" uid="uid://dde8wnraoc1by" path="res://assets/backgrounds/beacon.png" id="14_stkog"]
 [ext_resource type="Shader" path="res://shaders/room2.gdshader" id="16_tvreb"]
+[ext_resource type="AudioStream" uid="uid://btiyw8su57yv8" path="res://assets/audio/r2.ogg" id="17_5vr8j"]
+[ext_resource type="AudioStream" uid="uid://ch6ku3kwhwgls" path="res://assets/audio/scifi2.wav" id="18_f3brk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rymoi"]
 atlas = ExtResource("14_stkog")
@@ -385,6 +387,15 @@ text = "[center]0"
 [node name="Sprite2D" type="Sprite2D" parent="code"]
 position = Vector2(720, 165)
 texture = ExtResource("12_qgwt5")
+
+[node name="ambiance" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_5vr8j")
+autoplay = true
+
+[node name="bg music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_f3brk")
+volume_db = -8.432
+autoplay = true
 
 [connection signal="body_entered" from="door" to="." method="_on_door_body_entered"]
 [connection signal="body_exited" from="door" to="." method="_on_door_body_exited"]
