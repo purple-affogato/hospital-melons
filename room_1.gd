@@ -2,6 +2,7 @@ extends Node2D
 
 var reading = false
 var step1_cleared = false
+var step2_cleared = false
 var interactObject = "none"
 var dialogue_box
 var inventory
@@ -11,10 +12,11 @@ var dialogue = {
 		"It seems very shiny inside."],
 	"machine2" : 
 		["A laundry machine.", 
-		"Why does it have a magical aura?"],
+		"Why does it have such a magical aura?"],
 	"detergent" : 
 		["Laundry detergent. The quintessential item to peace and happiness.",
-		"It has a dangerously tempting aura."],
+		"It has a dangerously tempting aura.",
+		"AND SO! You grasp the laundry detergent. It fills you with vigor."],
 	"plant" : 
 		["A potted plant ... growing from a pot of red paint??", 
 		"That's not something you see every day. It smells a little funny.", 
@@ -23,13 +25,36 @@ var dialogue = {
 		"Ehe~, don't worry about it~. Instead, worry about picking up this potted plant."],
 	"step1" :
 		["Staring at the red paint in your items, you feel a slight want to cause chaos.",
-		"No one would get mad if you poured the paint into the laundry machine right?",
-		"It would be like coloured detergent! The new cultural phenomenon!",
+		"Nobody would get mad if you poured the paint into the laundry machine right?",
+		"It would be like coloured detergent! The newest cultural phenomenon!",
 		"With great confidence, you pour red paint into the laundry machine and start a cycle.",
 		"The laundry cycle finishes and out pops a batch of bright red lab coats. Fitting attire for the doctors of this hospital.",
 		"Did you just uncover one of hospital's seven mysteries? Possible but you try not to think about it.",
 		"*creaking sounds*",
-		"Did something just open up just now?"]
+		"Did something just open up just now?"],
+	"toothbrush" :
+		["It's a bit weird for a part of the wall to be removed only to reveal a toothbrush.",
+		"Why is there a toothbrush on the wall? Why is the wall static all of a sudden? Those are unimportant questions.",
+		"What matters is that you take the toothbrush off the wall. It must be something truly exciting."],
+	"step2" :
+		["Upon closer inspection, there are some specks of dust on this laundry machine.",
+		"It really bothers you, but it's gross to touch dust with your bare hands. ",
+		"So you decide to use the toothbrush in your hands to clean the laundry machine.",
+		"*WHOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOSHHHHHH*"],
+	"machine1-static" :
+		["Nothing to see here.",
+		"Definitely not suspiciously static and noisy-looking."],
+	"machine2-portal" :
+		["A portal appeared! Where could it lead?",
+		"You jump in! Into the new world!"],
+	"finish" :
+		["What are you still doing here?",
+		"You completed the room already. Get out."],
+	"machines-detergent" :
+		["Usually, you would put laundry detergent in a laundry machine to make your clothes crispy clean.",
+		"But we don't do that in this household.",
+		"You feel an invisible force pushing the laundry detergent away.",
+		"Such a rebellious laundry machine."]
 	}
 
 func _ready():
@@ -51,34 +76,54 @@ func _process(delta):
 			reading = true
 			dialogue_box.visible = true
 			$Player.set_physics_process(false)
+			$Player/AnimatedSprite2D.animation = "idle"
 			handle_item_interaction()
-	else:
-		if step1_cleared:
-			inventory.visible = false
-			$Toothbrush.visible = true
 
 func handle_item_interaction():
-	if interactObject == "plant":
-		if not $Plant.visible:
+	if (interactObject == "plant" and not $Plant.visible) or (interactObject == "detergent" and not $Detergent.visible) or (interactObject == "toothbrush" and not $Toothbrush.visible):
 			dialogue_box.visible = false
+	elif not step1_cleared:
+		if interactObject == "machine1" and inventory.item == "plant":
+			dialogue_box.start_reading(dialogue["step1"])
+			step1_cleared = true
+		elif (interactObject == "machine1" or interactObject == "machine2") and inventory.item == "detergent":
+			dialogue_box.start_reading(dialogue["machines-detergent"])
 		else:
 			dialogue_box.start_reading(dialogue[interactObject])
-	elif interactObject == "machine1" and inventory.item == "plant":
-		dialogue_box.start_reading(dialogue["step1"])
-		step1_cleared = true
+	
+	elif step1_cleared and not step2_cleared:
+		if interactObject == "machine2" and inventory.item == "toothbrush":
+			dialogue_box.start_reading(dialogue["step2"])
+			step2_cleared = true
+		elif (interactObject == "toothbrush" and not $Toothbrush.visible):
+			dialogue_box.visible = false
+		elif interactObject == "plant" or interactObject == "detergent":
+			dialogue_box.start_reading(dialogue[interactObject].slice(0, len(dialogue[interactObject]) - 1))
+		else:
+			dialogue_box.start_reading(dialogue[interactObject])
 	else:
-		dialogue_box.start_reading(dialogue[interactObject])
+		if interactObject == "machine2-portal":
+			dialogue_box.start_reading(dialogue[interactObject])
+		else:
+			dialogue_box.start_reading(dialogue["finish"])
 
 # handles adding and removing items from inventory after dialogue finishes
 func handle_item_switch():
-	if step1_cleared:
+	if step1_cleared and not step2_cleared:
 		if interactObject == "machine1" and inventory.item == "plant":
 			inventory.visible = false
 			$LaundryMachine1/AnimatedSprite2D.play("static")
-		if interactObject == "toothbrush":
+			interactObject = "machine1-static"
+		elif interactObject == "toothbrush":
 			inventory.visible = false
 			inventory.addItem("res://assets/items/toothbrush-item.png", "toothbrush")
-			
+	elif step2_cleared:
+		if interactObject == "machine2" and inventory.item == "toothbrush":
+			inventory.visible = false
+			$LaundryMachine2/AnimatedSprite2D.play("portal interact")
+			interactObject = "machine2-portal"
+		elif interactObject == "machine2-portal":
+			get_tree().change_scene_to_file("res://room2.tscn")
 	else:
 		if interactObject == "detergent":
 			inventory.visible = false
@@ -93,7 +138,7 @@ func handle_inventory():
 	# reset visibility
 	$Plant.visible = true
 	$Detergent.visible = true
-	if step1_cleared:
+	if step1_cleared and not step2_cleared:
 		$Toothbrush.visible = true
 		
 	if inventory.item == "plant":
@@ -116,11 +161,18 @@ func _on_laundry_machine_1_body_exited(body):
 	interactObject = "none"
 
 func _on_laundry_machine_2_body_entered(body):
-	$LaundryMachine2/AnimatedSprite2D.play("interact")
-	interactObject = "machine2"
+	if step2_cleared:
+		$LaundryMachine2/AnimatedSprite2D.play("portal interact")
+		interactObject = "machine2-portal"
+	else:
+		$LaundryMachine2/AnimatedSprite2D.play("interact")
+		interactObject = "machine2"
 	
 func _on_laundry_machine_2_body_exited(body):
-	$LaundryMachine2/AnimatedSprite2D.play("default")
+	if step2_cleared:
+		$LaundryMachine2/AnimatedSprite2D.play("portal")
+	else:
+		$LaundryMachine2/AnimatedSprite2D.play("default")
 	interactObject = "none"
 
 func _on_plant_body_entered(body):
