@@ -6,7 +6,6 @@ var idx = 0
 var reading = false
 
 func _process(delta):
-	print(InputEventKey)
 	if reading == true and Input.is_action_just_released("enter"): # this is how you check for the enter key
 		if idx+1 == len(dialogue):
 			reading = false
