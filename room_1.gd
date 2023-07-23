@@ -29,7 +29,7 @@ var dialogue = {
 		"It would be like coloured detergent! The newest cultural phenomenon!",
 		"With great confidence, you pour red paint into the laundry machine and start a cycle.",
 		"The laundry cycle finishes and out pops a batch of bright red lab coats. Fitting attire for the doctors of this hospital.",
-		"Did you just uncover one of hospital's seven mysteries? Possible but you try not to think about it.",
+		"Did you just uncover one of hospital's seven mysteries? Possible, but you try not to think about it.",
 		"*creaking sounds*",
 		"Did something just open up just now?"],
 	"toothbrush" :
@@ -61,13 +61,24 @@ var dialogue = {
 		"A rather inaccurate representation of the underlying nature of this hospital."],
 	"rack-detergent" :
 		["Pouring laundry detergent directly on these lab coats won't clean them.",
-		"At least use a laundry machine."]
+		"At least use a laundry machine."],
+	"start" :
+		["After a running away from a horde of crazy doctors and nurses, you find yourself in a rather strange room.",
+		"However, everything has been rather strange since you've entered this hospital.",
+		"It's almost as any common sense you knew previously has become corrupted. (!?)",
+		"Right now, you want to escape this hospital. It seems you have entered the laundry room?",
+		"Not the first room you'd run to when you're stuck in a hospital.",
+		"Nevertheless, it's time to take a look around and find a way out."]
 	}
 
 func _ready():
 	dialogue_box = $DialogueLayer/DialogueBox
 	inventory = $Inventory
 	inventory.visible = false
+	dialogue_box.start_reading(dialogue["start"])
+	reading = true
+	$Player.set_physics_process(false)
+	$Player/AnimatedSprite2D.animation = "idle"
 
 func _process(delta):
 	handle_inventory()
@@ -148,11 +159,15 @@ func handle_sfx():
 	if text == dialogue["step2"][2]:
 		$Radio.position = $LaundryMachine2.position
 		$Radio.stream = load("res://assets/audio/whoosh.wav")
-		$Radio.play()
 	elif text == dialogue["step1"][5]:
 		$Radio.position = $Toothbrush/CollisionShape2D.position
 		$Radio.stream = load("res://assets/audio/creaking.ogg")
-		$Radio.play()
+	elif interactObject == "machine1-static" and dialogue_box.idx == 0:
+		$Radio.position = $LaundryMachine1.position
+		$Radio.stream = load("res://assets/audio/static-noise.ogg")
+	else:
+		return
+	$Radio.play()
 
 # handles which items are visible based on the inventory
 func handle_inventory():
