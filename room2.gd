@@ -3,10 +3,11 @@ extends Node2D
 var interactObject = ""
 
 var dialogue = {
+	"code" : [],
 	"door" : [],
 	"heartLine" : [],
 	"biohazard" : ["A biohazard container", "I don't think biological waste is supposed to glow green"],
-	"heartThing" : ["A heart monitor", "It's not working..."],
+	"heartThing" : {["A heart monitor", "It's not working..."] : [[0,2],[0,1]]},
 	"bed" : ["A bed", "It looks very uncomfy", "Good thing I'm not tired"],
 	"outlet" : {["A broken wire, looks like it's for the heart monitor", "... looks dangerous", "What if I stuff the scissors into here..."] : [[0,2], [0,3]]},
 	"cart" : {["A Surgical cart", "Not much equipment on it, what a cheap hospital", "Oo but there are scissors!"] : [[0,3], [0,2]]}
@@ -24,17 +25,31 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if $DiaCont/DialogueBox.reading == false and reading:
-		if interactObject == "cart": $Inventory.addItem("res://assets/items/scissors.png", "scissors")
-		if interactObject == "outlet" and $Inventory.item == "scissors":
+		if interactObject == "cart" and !$heartLine.visible: $Inventory.addItem("res://assets/items/scissors.png", "scissors")
+		elif interactObject == "outlet" and $Inventory.item == "scissors":
 			$Inventory.visible = false
 			$heartLine.visible = true
 		reading = false
 		$Player.set_physics_process(true)
 	
-	if Input.is_key_pressed(KEY_E) and dialogue.has(interactObject) and len(dialogue[interactObject]) > 0:
-		reading = true
-		interact()
-		$Player.set_physics_process(false)
+	if Input.is_key_pressed(KEY_E) and interactObject != "":
+		if dialogue.has(interactObject) and len(dialogue[interactObject]) > 0:
+			reading = true
+			interact()
+		elif interactObject == "door": code()
+		idle()
+	
+	if $code.visible and Input.is_key_pressed(KEY_X):
+		$code.visible = false
+		$Player.set_physics_process(true)
+
+
+func code():
+	$code.visible = true
+
+func idle():
+	$Player/AnimatedSprite2D.play("idle")
+	$Player.set_physics_process(false)
 
 
 func interact():
@@ -46,7 +61,8 @@ func interact():
 
 func changeInteract(range1, range2): # for dialogue changes after an item is picked
 	$DiaCont/DialogueBox.visible = true
-	if $Inventory.visible == false: $DiaCont/DialogueBox.start_reading(dialogue[interactObject].keys().slice(0,1)[0].slice(range1[0],range1[1]))
+	if (!$Inventory.visible and !$heartLine.visible) or $heartLine.visible:
+		$DiaCont/DialogueBox.start_reading(dialogue[interactObject].keys().slice(0,1)[0].slice(range1[0],range1[1]))
 	else: $DiaCont/DialogueBox.start_reading(dialogue[interactObject].keys().slice(0,1)[0].slice(range2[0],range2[1]))
 
 

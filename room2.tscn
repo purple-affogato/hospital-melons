@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dmigj6t4jd3de"]
+[gd_scene load_steps=25 format=3 uid="uid://dmigj6t4jd3de"]
 
 [ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="1_ak4e3"]
 [ext_resource type="Script" path="res://room2.gd" id="1_f5fp5"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://m52bm0pdbgle" path="res://assets/items/outlet.png" id="8_5i0ps"]
 [ext_resource type="Texture2D" uid="uid://dvaie2dri5r0x" path="res://assets/items/cart.png" id="9_eqgf4"]
 [ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="10_gj6tw"]
+[ext_resource type="Script" path="res://code.gd" id="12_3h38f"]
+[ext_resource type="Texture2D" uid="uid://c5moqrtd6k1h1" path="res://assets/items/x.png" id="12_qgwt5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mw4st"]
 size = Vector2(2058, 7)
@@ -38,6 +40,10 @@ size = Vector2(99, 115)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p15ep"]
 size = Vector2(183, 135)
+
+[sub_resource type="Theme" id="Theme_t30py"]
+
+[sub_resource type="Theme" id="Theme_muivg"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_f5fp5")
@@ -156,6 +162,97 @@ position = Vector2(304, 464)
 
 [node name="DialogueBox" parent="DiaCont" instance=ExtResource("10_gj6tw")]
 visible = false
+
+[node name="code" type="CanvasLayer" parent="."]
+script = ExtResource("12_3h38f")
+
+[node name="bg" type="ColorRect" parent="code"]
+offset_left = 192.0
+offset_top = 58.0
+offset_right = 821.0
+offset_bottom = 532.0
+color = Color(0.0823529, 0.117647, 0.137255, 1)
+
+[node name="title" type="RichTextLabel" parent="code"]
+offset_left = 259.0
+offset_top = 147.0
+offset_right = 751.0
+offset_bottom = 270.0
+theme = SubResource("Theme_t30py")
+theme_override_font_sizes/normal_font_size = 70
+text = "Enter the code"
+
+[node name="rect1" type="ColorRect" parent="code"]
+offset_left = 245.0
+offset_top = 278.0
+offset_right = 356.0
+offset_bottom = 418.0
+color = Color(0.286275, 0.866667, 0.427451, 1)
+
+[node name="rect2" type="ColorRect" parent="code"]
+offset_left = 382.0
+offset_top = 278.0
+offset_right = 493.0
+offset_bottom = 418.0
+color = Color(0.286275, 0.866667, 0.427451, 1)
+
+[node name="rect3" type="ColorRect" parent="code"]
+offset_left = 517.0
+offset_top = 278.0
+offset_right = 628.0
+offset_bottom = 418.0
+color = Color(0.286275, 0.866667, 0.427451, 1)
+
+[node name="rect4" type="ColorRect" parent="code"]
+offset_left = 654.0
+offset_top = 278.0
+offset_right = 765.0
+offset_bottom = 418.0
+color = Color(0.286275, 0.866667, 0.427451, 1)
+
+[node name="code1" type="RichTextLabel" parent="code"]
+offset_left = 245.0
+offset_top = 278.0
+offset_right = 356.0
+offset_bottom = 418.0
+theme = SubResource("Theme_muivg")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]0"
+
+[node name="code2" type="RichTextLabel" parent="code"]
+offset_left = 382.0
+offset_top = 278.0
+offset_right = 493.0
+offset_bottom = 418.0
+theme = SubResource("Theme_muivg")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]0"
+
+[node name="code3" type="RichTextLabel" parent="code"]
+offset_left = 517.0
+offset_top = 278.0
+offset_right = 628.0
+offset_bottom = 418.0
+theme = SubResource("Theme_muivg")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]0"
+
+[node name="code4" type="RichTextLabel" parent="code"]
+offset_left = 654.0
+offset_top = 278.0
+offset_right = 765.0
+offset_bottom = 418.0
+theme = SubResource("Theme_muivg")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]0"
+
+[node name="Sprite2D" type="Sprite2D" parent="code"]
+position = Vector2(720, 165)
+texture = ExtResource("12_qgwt5")
 
 [connection signal="body_entered" from="door" to="." method="_on_door_body_entered"]
 [connection signal="body_exited" from="door" to="." method="_on_door_body_exited"]
