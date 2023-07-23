@@ -33,6 +33,8 @@ func _input(event):
 			if ans == code:
 				for i in range(1,5):
 					get_node("rect" + str(i)).color = "#0dff4d"
+				get_parent().get_node("radio").stream = load("res://assets/audio/W.wav")
+				get_parent().get_node("radio").play()
 				await get_tree().create_timer(0.5).timeout
 				visible = false
 				win = true
@@ -41,6 +43,8 @@ func _input(event):
 			else:
 				for i in range(1,5):
 					get_node("rect" + str(i)).color = "#fe414e"
+				get_parent().get_node("radio").stream = load("res://assets/audio/wrong.wav")
+				get_parent().get_node("radio").play()
 				await get_tree().create_timer(0.5).timeout
 				for i in range(1,5):
 					get_node("rect" + str(i)).color = "#49dd6d"

@@ -352,6 +352,8 @@ text = "[center]0"
 position = Vector2(720, 165)
 texture = ExtResource("12_qgwt5")
 
+[node name="radio" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="body_entered" from="door" to="." method="_on_door_body_entered"]
 [connection signal="body_exited" from="door" to="." method="_on_door_body_exited"]
 [connection signal="body_entered" from="biohazard" to="." method="_on_biohazard_body_entered"]

@@ -15,6 +15,7 @@ var dialogue = {
 }
 
 var startDia = ["Gah, another room", "*Sigh* maybe I'll at least be able to vandalize more items here", "Ah well, time to find a way out"]
+var endDia = ["...", "ok..."]
 
 var reading = false
 
@@ -40,6 +41,8 @@ func _process(delta):
 			$heartLine.visible = true
 			$scissors.texture = load("res://assets/backgrounds/scissors.png")
 			$scissors.visible = true
+			$radio.stream = load("res://assets/audio/beep.ogg")
+			$radio.play()
 		reading = false
 		$Player.set_physics_process(true)
 	
@@ -60,9 +63,16 @@ func _process(delta):
 	
 	if $code.win == true and !$beacon.visible:
 		$beacon.visible = true
+		$radio.stream = load("res://assets/audio/laserbeam.wav")
+		$radio.play()
 		$beacon/animated.play("start")
 		await get_tree().create_timer(0.2).timeout 
 		$beacon/animated.play("default")
+		idle()
+		await get_tree().create_timer(1).timeout
+		$DiaCont/DialogueBox.visible = true
+		reading = true
+		$DiaCont/DialogueBox.start_reading(endDia)
 
 
 func code():
@@ -90,7 +100,6 @@ func interact():
 
 
 func changeInteract(range1, range2): # for dialogue changes after an item is picked
-	
 	$DiaCont/DialogueBox.start_reading(dialogue[interactObject].slice(range1, range2))
 
 
