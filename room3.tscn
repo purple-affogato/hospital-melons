@@ -1,7 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://djjjm0wkc15mu"]
+[gd_scene load_steps=27 format=3 uid="uid://bexgx67wvs5qd"]
+
+[ext_resource type="Script" path="res://room3.gd" id="1_wcjfg"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/room3-bg.png" id="2_2jy1c"]
+[ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="2_pryv6"]
+[ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="3_pyrdy"]
+[ext_resource type="Texture2D" path="res://assets/items/coffee.png" id="5_0ngaq"]
+[ext_resource type="Texture2D" path="res://assets/items/coffee-glowing.png" id="6_6pgus"]
+[ext_resource type="Texture2D" path="res://pinata-org.png" id="7_54akk"]
+[ext_resource type="Texture2D" path="res://assets/sprites/mustache.png" id="7_ncont"]
+[ext_resource type="Texture2D" path="res://assets/sprites/pinata-glowing.png" id="8_exvne"]
+[ext_resource type="Texture2D" path="res://assets/sprites/glowing-mustache.png" id="8_xgsor"]
+[ext_resource type="Texture2D" path="res://assets/sprites/pinata-org1.png" id="9_217fi"]
+[ext_resource type="Texture2D" path="res://assets/sprites/pinata-org2.png" id="10_bag1c"]
+[ext_resource type="Texture2D" path="res://assets/sprites/pinata-org3.png" id="11_m4l8g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1u4sx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0ngaq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6pgus")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxwtv"]
+size = Vector2(30.25, 64.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3sga0"]
-size = Vector2(1019.5, 25)
+size = Vector2(1433.5, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42p3l"]
 size = Vector2(25.5, 600)
@@ -9,12 +40,128 @@ size = Vector2(25.5, 600)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kxhbw"]
 size = Vector2(25.5, 600)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pksll"]
+size = Vector2(40, 111)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eyooh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ncont")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xgsor")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_rueic"]
+resource_name = "fly"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1.1, 1.6, 2.1, 2.6, 3.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(330, 275), Vector2(315, 275), Vector2(315, 275), Vector2(345, 275), Vector2(360, 380), Vector2(315, 275)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nptue"]
+_data = {
+"fly": SubResource("Animation_rueic")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d5baa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_54akk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_exvne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_217fi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_bag1c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_m4l8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_54akk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oegfm"]
+size = Vector2(111.5, 192)
+
+[sub_resource type="Animation" id="Animation_j5y2r"]
+resource_name = "Move position"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8, 2.2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1155, 345), Vector2(1135, 325), Vector2(1115, 305)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4pq8s"]
+_data = {
+"Move position": SubResource("Animation_j5y2r")
+}
+
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_wcjfg")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = 4.0
+offset_top = -6.0
+offset_right = 1028.0
+offset_bottom = 594.0
+texture = ExtResource("2_2jy1c")
+
+[node name="DialogueBox" parent="." instance=ExtResource("3_pyrdy")]
+
+[node name="coffee" type="Area2D" parent="."]
+position = Vector2(835, 477)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="coffee"]
+position = Vector2(51, 20)
+scale = Vector2(0.036775, 0.036775)
+sprite_frames = SubResource("SpriteFrames_1u4sx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="coffee"]
+position = Vector2(53, 17)
+shape = SubResource("RectangleShape2D_wxwtv")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(512.25, 584.5)
+position = Vector2(719.25, 584.5)
 shape = SubResource("RectangleShape2D_3sga0")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
@@ -22,11 +169,47 @@ position = Vector2(15.25, 297)
 shape = SubResource("RectangleShape2D_42p3l")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1006, 295)
+position = Vector2(1431, 304)
 shape = SubResource("RectangleShape2D_kxhbw")
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -2.0
-offset_top = 463.0
-offset_right = 1016.0
-offset_bottom = 634.0
+[node name="CharacterBody2D" parent="StaticBody2D" instance=ExtResource("2_pryv6")]
+position = Vector2(140, 458)
+
+[node name="mustache" type="Area2D" parent="."]
+
+[node name="collisionArea2D" type="CollisionShape2D" parent="mustache"]
+position = Vector2(317, 311.5)
+shape = SubResource("RectangleShape2D_pksll")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="mustache"]
+position = Vector2(316, 275)
+scale = Vector2(0.0125141, 0.016875)
+sprite_frames = SubResource("SpriteFrames_eyooh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="mustache"]
+libraries = {
+"": SubResource("AnimationLibrary_nptue")
+}
+
+[node name="pinata" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="pinata"]
+position = Vector2(1155, 345)
+scale = Vector2(0.224566, 0.224566)
+sprite_frames = SubResource("SpriteFrames_d5baa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pinata"]
+position = Vector2(1152, 356)
+shape = SubResource("RectangleShape2D_oegfm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="pinata"]
+libraries = {
+"": SubResource("AnimationLibrary_4pq8s")
+}
+
+[connection signal="body_entered" from="coffee" to="." method="_on_coffee_body_entered"]
+[connection signal="body_exited" from="coffee" to="." method="_on_coffee_body_exited"]
+[connection signal="body_entered" from="mustache" to="." method="_on_mustache_body_entered"]
+[connection signal="body_exited" from="mustache" to="." method="_on_mustache_body_exited"]
+[connection signal="body_entered" from="pinata" to="." method="_on_pinata_body_entered"]
+[connection signal="body_exited" from="pinata" to="." method="_on_pinata_body_exited"]
