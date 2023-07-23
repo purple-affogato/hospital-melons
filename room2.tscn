@@ -1,10 +1,11 @@
-[gd_scene load_steps=37 format=3 uid="uid://dmigj6t4jd3de"]
+[gd_scene load_steps=38 format=3 uid="uid://dmigj6t4jd3de"]
 
 [ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="1_ak4e3"]
 [ext_resource type="Script" path="res://room2.gd" id="1_f5fp5"]
 [ext_resource type="Texture2D" uid="uid://btx07qvmncee4" path="res://assets/backgrounds/room2-bg.png" id="2_dgnlw"]
 [ext_resource type="Texture2D" uid="uid://ytg4rgyv56jn" path="res://assets/items/heart-line.png" id="2_nxcmd"]
 [ext_resource type="Script" path="res://heart line.gd" id="3_2314g"]
+[ext_resource type="Texture2D" uid="uid://dftb3yagxushi" path="res://assets/backgrounds/scissors2.png" id="4_vlst0"]
 [ext_resource type="PackedScene" uid="uid://c8yfccrywl1w8" path="res://inventory.tscn" id="5_87uyv"]
 [ext_resource type="Texture2D" uid="uid://bwc546lcms3lm" path="res://assets/items/heartThing.png" id="6_ielvq"]
 [ext_resource type="Texture2D" uid="uid://bhdefhcabmrpr" path="res://assets/items/bed.png" id="7_8fcgx"]
@@ -14,37 +15,6 @@
 [ext_resource type="Script" path="res://code.gd" id="12_3h38f"]
 [ext_resource type="Texture2D" uid="uid://c5moqrtd6k1h1" path="res://assets/items/x.png" id="12_qgwt5"]
 [ext_resource type="Texture2D" uid="uid://dde8wnraoc1by" path="res://assets/backgrounds/beacon.png" id="14_stkog"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mw4st"]
-size = Vector2(2058, 7)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_trm3w"]
-size = Vector2(10, 610)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtaff"]
-size = Vector2(8, 600)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_54mb3"]
-size = Vector2(177, 335)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1qk5"]
-size = Vector2(112, 172)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4r5b"]
-size = Vector2(87, 381)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4cs4t"]
-size = Vector2(432, 201)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ub680"]
-size = Vector2(99, 115)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p15ep"]
-size = Vector2(183, 135)
-
-[sub_resource type="Theme" id="Theme_t30py"]
-
-[sub_resource type="Theme" id="Theme_muivg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rymoi"]
 atlas = ExtResource("14_stkog")
@@ -125,6 +95,37 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xm6lq"]
 size = Vector2(90, 702)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mw4st"]
+size = Vector2(2058, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trm3w"]
+size = Vector2(10, 610)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtaff"]
+size = Vector2(8, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_54mb3"]
+size = Vector2(177, 335)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1qk5"]
+size = Vector2(112, 172)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4r5b"]
+size = Vector2(87, 381)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4cs4t"]
+size = Vector2(432, 201)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ub680"]
+size = Vector2(99, 115)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p15ep"]
+size = Vector2(183, 135)
+
+[sub_resource type="Theme" id="Theme_t30py"]
+
+[sub_resource type="Theme" id="Theme_muivg"]
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_f5fp5")
 
@@ -132,6 +133,23 @@ script = ExtResource("1_f5fp5")
 position = Vector2(1024, 300)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_dgnlw")
+
+[node name="beacon" type="Area2D" parent="."]
+position = Vector2(-4, 0)
+scale = Vector2(0.5, 0.5)
+
+[node name="animated" type="AnimatedSprite2D" parent="beacon"]
+sprite_frames = SubResource("SpriteFrames_q28a3")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="beacon"]
+position = Vector2(225, 425)
+shape = SubResource("RectangleShape2D_xm6lq")
+
+[node name="scissors" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_vlst0")
+centered = false
 
 [node name="heartLine" type="Control" parent="."]
 clip_contents = true
@@ -333,18 +351,6 @@ text = "[center]0"
 [node name="Sprite2D" type="Sprite2D" parent="code"]
 position = Vector2(720, 165)
 texture = ExtResource("12_qgwt5")
-
-[node name="beacon" type="Area2D" parent="."]
-position = Vector2(-4, 0)
-scale = Vector2(0.5, 0.5)
-
-[node name="animated" type="AnimatedSprite2D" parent="beacon"]
-sprite_frames = SubResource("SpriteFrames_q28a3")
-centered = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="beacon"]
-position = Vector2(225, 425)
-shape = SubResource("RectangleShape2D_xm6lq")
 
 [connection signal="body_entered" from="door" to="." method="_on_door_body_entered"]
 [connection signal="body_exited" from="door" to="." method="_on_door_body_exited"]

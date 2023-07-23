@@ -14,6 +14,8 @@ var dialogue = {
 	"cart" : {["A Surgical cart", "Not much equipment on it, what a cheap hospital", "Oo but there are scissors!"] : [[0,3], [0,2]]}
 }
 
+var startDia = ["Gah, another room", "*Sigh* maybe I'll at least be able to vandalize more items here", "Ah well, time to find a way out"]
+
 var reading = false
 
 # Called when the node enters the scene tree for the first time.
@@ -21,15 +23,23 @@ func _ready():
 	$Inventory.visible = false
 	for item in dialogue:
 		get_node(item).visible = false
-
-
+	$DiaCont/DialogueBox.visible = true
+	reading = true
+	$DiaCont/DialogueBox.start_reading(startDia)
+	idle()
+	
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if $DiaCont/DialogueBox.reading == false and reading:
-		if interactObject == "cart" and !$heartLine.visible: $Inventory.addItem("res://assets/items/scissors.png", "scissors")
+		if interactObject == "cart" and !$heartLine.visible and $scissors.visible: 
+			$Inventory.addItem("res://assets/items/scissors.png", "scissors")
+			$scissors.visible = false
 		elif interactObject == "outlet" and $Inventory.item == "scissors":
 			$Inventory.visible = false
 			$heartLine.visible = true
+			$scissors.texture = load("res://assets/backgrounds/scissors.png")
+			$scissors.visible = true
 		reading = false
 		$Player.set_physics_process(true)
 	
@@ -41,6 +51,9 @@ func _process(delta):
 			interact()
 		elif interactObject == "door": code()
 		idle()
+	
+	if $Inventory.visible and Input.is_key_pressed(KEY_X):
+		$scissors.visible = true
 	
 	if $code.visible and Input.is_key_pressed(KEY_X):
 		$code.visible = false
