@@ -14,7 +14,7 @@ var dialogue = {
 	"cart" : ["A surgical cart", "Not much equipment on it, what a cheap hospital", "Oo but there are scissors!"]
 }
 
-var startDia = ["Gah, another room", "Bleh, why do I feel so fizzy?", "*Sigh* maybe I'll at least be able to vandalize more items here", "Something about aura of this room tells me that this is the final room of this hospital", "*Sheds tear* so close to freedom", "Time to look around!"]
+var startDia = ["Gah, another room", "Bleh, why do I feel so fizzy?", "*sigh* maybe I'll at least be able to vandalize more items here", "Something about aura of this room tells me that this is the final room of this hospital", "*sheds tear* so close to freedom", "Time to look around!"]
 var endDia = ["I- YES! Finally!", "I get to leave this place- yes!", "After all of my hardships: running from nurses, scrubbing washing machines, and performing questionable electrical fixes, I've reached the end", "Truely a joyous occasion- wait why isn't the door opening-", "...", "ok..."]
 
 var reading = false
