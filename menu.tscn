@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://wjt0ka4ftvcj"]
+[gd_scene load_steps=8 format=3 uid="uid://wjt0ka4ftvcj"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_37y0v"]
 [ext_resource type="Texture2D" uid="uid://dxrq7oj86keq7" path="res://assets/backgrounds/menu.png" id="1_la2vs"]
+[ext_resource type="AudioStream" uid="uid://bp7gba4mbk1s0" path="res://assets/audio/menu.mp3" id="3_1ypn4"]
 
 [sub_resource type="Theme" id="Theme_knrg7"]
 
@@ -49,6 +50,11 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_vs18s")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_y33bu")
 text = "HOW TO PLAY"
 text_direction = 3
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_1ypn4")
+volume_db = -4.685
+autoplay = true
 
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="how2play" to="." method="_on_how_2_play_pressed"]
