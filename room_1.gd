@@ -75,6 +75,7 @@ func _ready():
 	dialogue_box = $DialogueLayer/DialogueBox
 	inventory = $Inventory
 	inventory.visible = false
+	dialogue_box.visible = true
 	dialogue_box.start_reading(dialogue["start"])
 	reading = true
 	$Player.set_physics_process(false)
