@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dde8wnraoc1by" path="res://assets/backgrounds/beacon.png" id="14_stkog"]
 [ext_resource type="Shader" path="res://shaders/room2.gdshader" id="16_tvreb"]
 [ext_resource type="AudioStream" uid="uid://btiyw8su57yv8" path="res://assets/audio/r2.ogg" id="17_5vr8j"]
-[ext_resource type="AudioStream" uid="uid://ch6ku3kwhwgls" path="res://assets/audio/scifi2.wav" id="18_f3brk"]
+[ext_resource type="AudioStream" uid="uid://dic84l4ql5vqd" path="res://assets/audio/Stayin_-Lazy-Godmode.wav" id="18_4qqml"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rymoi"]
 atlas = ExtResource("14_stkog")
@@ -393,7 +393,7 @@ stream = ExtResource("17_5vr8j")
 autoplay = true
 
 [node name="bg music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("18_f3brk")
+stream = ExtResource("18_4qqml")
 volume_db = -8.432
 autoplay = true
 
