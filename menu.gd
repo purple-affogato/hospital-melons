@@ -16,4 +16,4 @@ func _on_start_pressed():
 
 
 func _on_how_2_play_pressed():
-	print("instructions path lol")
+	get_tree().change_scene_to_file("res://instructions.tscn")

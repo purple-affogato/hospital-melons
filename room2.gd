@@ -49,7 +49,7 @@ func _process(delta):
 	
 	if Input.is_key_pressed(KEY_E) and interactObject != "":
 		if interactObject == "biohazard" and $code.win:
-			print("YOU WINNNNNNNNNNNN")
+			get_tree().change_scene_to_file("res://room3.tscn")
 		elif dialogue.has(interactObject) and len(dialogue[interactObject]) > 0:
 			reading = true
 			interact()
