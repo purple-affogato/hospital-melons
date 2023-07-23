@@ -16,10 +16,10 @@ texture = ExtResource("1_qebp0")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 19.0
-offset_top = 20.0
-offset_right = 954.0
-offset_bottom = 161.0
+offset_left = 35.0
+offset_top = 35.0
+offset_right = 949.0
+offset_bottom = 176.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 35
 text = "(empty)"
