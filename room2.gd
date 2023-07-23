@@ -10,12 +10,12 @@ var dialogue = {
 	"biohazard" : ["A biohazard container", "I don't think biological waste is supposed to glow green"],
 	"heartThing" : [["A heart monitor", "It's not working..."], ["A heart monitor", "Hehe I fixed it"]],
 	"bed" : ["A bed", "It looks very uncomfy", "Good thing I'm not tired"],
-	"outlet" : [["A broken wire, looks like it's for the heart monitor", "... looks dangerous", "What if I stuff the scissors into here..."], ["A broken wire, looks like it's for the heart monitor", "Still looks dangerous",]],
+	"outlet" : [["A broken wire, looks like it's for the heart monitor", "... looks dangerous", "Oh, what if I stuff the scissors into here!"], ["A broken wire, looks like it's for the heart monitor", "Still looks dangerous",]],
 	"cart" : ["A surgical cart", "Not much equipment on it, what a cheap hospital", "Oo but there are scissors!"]
 }
 
 var startDia = ["Gah, another room", "Bleh, why do I feel so fizzy?", "*Sigh* maybe I'll at least be able to vandalize more items here", "Ah well, time to find a way out"]
-var endDia = ["...", "ok..."]
+var endDia = ["I- YES! Finally!", "I get to leave this place- yes!", "Now why isn't the door opening-", "...", "ok..."]
 
 var reading = false
 
@@ -41,6 +41,7 @@ func _process(delta):
 			$heartLine.visible = true
 			$scissors.texture = load("res://assets/backgrounds/scissors.png")
 			$scissors.visible = true
+			$radio.volume_db = 16
 			$radio.stream = load("res://assets/audio/beep.ogg")
 			$radio.play()
 		reading = false
@@ -61,18 +62,18 @@ func _process(delta):
 		$code.visible = false
 		$Player.set_physics_process(true)
 	
-	if $code.win == true and !$beacon.visible:
+	if $code.win and !reading and !$beacon.visible:
+		idle()
+		$DiaCont/DialogueBox.visible = true
+		reading = true
+		$DiaCont/DialogueBox.start_reading(endDia)
+	if $DiaCont/DialogueBox.idx == 3 and $code.win and !$beacon.visible:
 		$beacon.visible = true
 		$radio.stream = load("res://assets/audio/laserbeam.wav")
 		$radio.play()
 		$beacon/animated.play("start")
-		await get_tree().create_timer(0.2).timeout 
+		await get_tree().create_timer(0.3).timeout 
 		$beacon/animated.play("default")
-		idle()
-		await get_tree().create_timer(1).timeout
-		$DiaCont/DialogueBox.visible = true
-		reading = true
-		$DiaCont/DialogueBox.start_reading(endDia)
 
 
 func code():
