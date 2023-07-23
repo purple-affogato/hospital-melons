@@ -14,7 +14,7 @@ var dialogue = {
 	"cart" : ["A surgical cart", "Not much equipment on it, what a cheap hospital", "Oo but there are scissors!"]
 }
 
-var startDia = ["Gah, another room", "*Sigh* maybe I'll at least be able to vandalize more items here", "Ah well, time to find a way out"]
+var startDia = ["Gah, another room", "Bleh, why do I feel so fizzy?", "*Sigh* maybe I'll at least be able to vandalize more items here", "Ah well, time to find a way out"]
 var endDia = ["...", "ok..."]
 
 var reading = false

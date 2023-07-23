@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dmigj6t4jd3de"]
+[gd_scene load_steps=40 format=3 uid="uid://dmigj6t4jd3de"]
 
 [ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="1_ak4e3"]
 [ext_resource type="Script" path="res://room2.gd" id="1_f5fp5"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://code.gd" id="12_3h38f"]
 [ext_resource type="Texture2D" uid="uid://c5moqrtd6k1h1" path="res://assets/items/x.png" id="12_qgwt5"]
 [ext_resource type="Texture2D" uid="uid://dde8wnraoc1by" path="res://assets/backgrounds/beacon.png" id="14_stkog"]
+[ext_resource type="Shader" path="res://shaders/room2.gdshader" id="16_tvreb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rymoi"]
 atlas = ExtResource("14_stkog")
@@ -122,6 +123,30 @@ size = Vector2(99, 115)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p15ep"]
 size = Vector2(183, 135)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hmgk6"]
+shader = ExtResource("16_tvreb")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.1
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.0
+shader_parameter/roll_size = 10.505
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.005
+shader_parameter/noise_opacity = 1.0
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.01
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
 [sub_resource type="Theme" id="Theme_t30py"]
 
 [sub_resource type="Theme" id="Theme_muivg"]
@@ -145,11 +170,6 @@ centered = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="beacon"]
 position = Vector2(225, 425)
 shape = SubResource("RectangleShape2D_xm6lq")
-
-[node name="scissors" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_vlst0")
-centered = false
 
 [node name="heartLine" type="Control" parent="."]
 clip_contents = true
@@ -251,8 +271,22 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_eqgf4")
 centered = false
 
+[node name="scissors" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_vlst0")
+centered = false
+
 [node name="Player" parent="." instance=ExtResource("1_ak4e3")]
 position = Vector2(304, 464)
+
+[node name="radio" type="AudioStreamPlayer2D" parent="."]
+
+[node name="viewport" type="CanvasLayer" parent="."]
+
+[node name="shader" type="ColorRect" parent="viewport"]
+material = SubResource("ShaderMaterial_hmgk6")
+offset_right = 1026.0
+offset_bottom = 606.0
 
 [node name="Inventory" parent="." instance=ExtResource("5_87uyv")]
 
@@ -351,8 +385,6 @@ text = "[center]0"
 [node name="Sprite2D" type="Sprite2D" parent="code"]
 position = Vector2(720, 165)
 texture = ExtResource("12_qgwt5")
-
-[node name="radio" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="body_entered" from="door" to="." method="_on_door_body_entered"]
 [connection signal="body_exited" from="door" to="." method="_on_door_body_exited"]
