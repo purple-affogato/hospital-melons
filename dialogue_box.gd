@@ -6,6 +6,8 @@ var idx = 0
 var reading = false
 
 func _process(_delta):
+	if not visible:
+		return
 	if reading == true and Input.is_action_just_released("enter"):
 		idx += 1
 		if idx == len(dialogue):

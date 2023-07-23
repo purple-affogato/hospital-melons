@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://7wa2yms0xqwy"]
+
+[ext_resource type="Texture2D" uid="uid://d0smovqym0ako" path="res://assets/backgrounds/menu-without-text.png" id="1_6tti5"]
+[ext_resource type="Script" path="res://ending.gd" id="1_qwpj2"]
+[ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="3_xkq0b"]
+
+[node name="Ending" type="Node2D"]
+script = ExtResource("1_qwpj2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1024.0
+offset_bottom = 600.0
+texture = ExtResource("1_6tti5")
+expand_mode = 1
+
+[node name="DialogueBox" parent="." instance=ExtResource("3_xkq0b")]
+offset_left = 25.0
+offset_top = 23.0
+offset_right = 25.0
+offset_bottom = 23.0
