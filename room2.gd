@@ -8,10 +8,10 @@ var dialogue = {
 	"door" : [],
 	"heartLine" : [],
 	"biohazard" : ["A biohazard container", "I don't think biological waste is supposed to glow green"],
-	"heartThing" : {["A heart monitor", "It's not working..."] : [[0,2],[0,1]]},
+	"heartThing" : [["A heart monitor", "It's not working..."], ["A heart monitor", "Hehe I fixed it"]],
 	"bed" : ["A bed", "It looks very uncomfy", "Good thing I'm not tired"],
-	"outlet" : {["A broken wire, looks like it's for the heart monitor", "... looks dangerous", "What if I stuff the scissors into here..."] : [[0,2], [0,3]]},
-	"cart" : {["A Surgical cart", "Not much equipment on it, what a cheap hospital", "Oo but there are scissors!"] : [[0,3], [0,2]]}
+	"outlet" : [["A broken wire, looks like it's for the heart monitor", "... looks dangerous", "What if I stuff the scissors into here..."], ["A broken wire, looks like it's for the heart monitor", "Still looks dangerous",]],
+	"cart" : ["A surgical cart", "Not much equipment on it, what a cheap hospital", "Oo but there are scissors!"]
 }
 
 var startDia = ["Gah, another room", "*Sigh* maybe I'll at least be able to vandalize more items here", "Ah well, time to find a way out"]
@@ -54,7 +54,6 @@ func _process(delta):
 	
 	if $Inventory.visible and Input.is_key_pressed(KEY_X):
 		$scissors.visible = true
-	
 	if $code.visible and Input.is_key_pressed(KEY_X):
 		$code.visible = false
 		$Player.set_physics_process(true)
@@ -76,16 +75,23 @@ func idle():
 
 func interact():
 	$DiaCont/DialogueBox.visible = true
-	if typeof(dialogue[interactObject]) == TYPE_ARRAY:
+	if interactObject == "heartThing":
+		if $heartLine.visible: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][1])
+		else: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][0])
+	elif interactObject == "outlet":
+		if $heartLine.visible: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][1])
+		elif $scissors.visible: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][0].slice(0,2))
+		else: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][0])
+	elif interactObject == "cart":
+		if $scissors.visible and !$heartLine.visible: changeInteract(0,3)
+		else: changeInteract(0,2)
+	elif typeof(dialogue[interactObject]) == TYPE_ARRAY:
 		$DiaCont/DialogueBox.start_reading(dialogue[interactObject])
-	else: changeInteract(dialogue[interactObject].values().slice(0,1)[0][0], dialogue[interactObject].values().slice(0,1)[0][1])
 
 
 func changeInteract(range1, range2): # for dialogue changes after an item is picked
-	$DiaCont/DialogueBox.visible = true
-	if (!$Inventory.visible and !$heartLine.visible) or $heartLine.visible:
-		$DiaCont/DialogueBox.start_reading(dialogue[interactObject].keys().slice(0,1)[0].slice(range1[0],range1[1]))
-	else: $DiaCont/DialogueBox.start_reading(dialogue[interactObject].keys().slice(0,1)[0].slice(range2[0],range2[1]))
+	
+	$DiaCont/DialogueBox.start_reading(dialogue[interactObject].slice(range1, range2))
 
 
 func _on_door_body_entered(body):
