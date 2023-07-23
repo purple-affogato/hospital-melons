@@ -1,24 +1,29 @@
-[gd_scene load_steps=24 format=3 uid="uid://bexgx67wvs5qd"]
+[gd_scene load_steps=23 format=3 uid="uid://p0oy0msew0om"]
 
 [ext_resource type="Script" path="res://room3.gd" id="1_wcjfg"]
 [ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="2_pryv6"]
+[ext_resource type="Texture2D" uid="uid://b0aafsta4v84" path="res://assets/items/coffee.png" id="3_31dix"]
 [ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="3_pyrdy"]
 [ext_resource type="Texture2D" uid="uid://cl2oum3ml0jr" path="res://assets/items/mustache.png" id="4_6qjpc"]
-[ext_resource type="Texture2D" path="res://pinata-org.png" id="7_54akk"]
-[ext_resource type="Texture2D" path="res://assets/sprites/pinata-glowing.png" id="8_exvne"]
+[ext_resource type="Texture2D" uid="uid://dekvqa5ywve1h" path="res://assets/items/coffee-glowing.png" id="4_8is3p"]
 [ext_resource type="Texture2D" uid="uid://caigghf1j4wwb" path="res://assets/items/glowing-mustache.png" id="8_fv63i"]
-[ext_resource type="Texture2D" path="res://assets/sprites/pinata-org1.png" id="9_217fi"]
-[ext_resource type="Texture2D" path="res://assets/sprites/pinata-org2.png" id="10_bag1c"]
-[ext_resource type="Texture2D" path="res://assets/sprites/pinata-org3.png" id="11_m4l8g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v76a2"]
+atlas = ExtResource("3_31dix")
+region = Rect2(0, 0, 2500, 2500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7di4"]
+atlas = ExtResource("4_8is3p")
+region = Rect2(0, 0, 2500, 2500)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1u4sx"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_v76a2")
 }, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_c7di4")
 }],
 "loop": true,
 "name": &"default",
@@ -79,22 +84,22 @@ _data = {
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_54akk")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_exvne")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_217fi")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_bag1c")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_m4l8g")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_54akk")
+"texture": null
 }],
 "loop": true,
 "name": &"default",
@@ -149,6 +154,7 @@ position = Vector2(835, 477)
 position = Vector2(51, 20)
 scale = Vector2(0.036775, 0.036775)
 sprite_frames = SubResource("SpriteFrames_1u4sx")
+frame_progress = 0.574241
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="coffee"]
 position = Vector2(53, 17)
