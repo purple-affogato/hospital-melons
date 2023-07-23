@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cy301oahplc5l"]
+[gd_scene load_steps=20 format=3 uid="uid://cy301oahplc5l"]
 
 [ext_resource type="Script" path="res://room_1.gd" id="1_2f4aq"]
 [ext_resource type="Texture2D" uid="uid://cw563kpl5tidr" path="res://assets/backgrounds/room1-bg.png" id="1_ifqet"]
@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bt7wx6lq4tebd" path="res://dialogue_box.tscn" id="4_tdoma"]
 [ext_resource type="PackedScene" uid="uid://cbo3o2fy3wjwg" path="res://player.tscn" id="5_36dd3"]
 [ext_resource type="Texture2D" uid="uid://bm07fs26wfsxl" path="res://assets/items/detergent-spritemap.png" id="5_x0pgb"]
+[ext_resource type="Texture2D" uid="uid://bprdc4usonu15" path="res://assets/items/toothpaste-trapdoor.png" id="6_awv2q"]
 [ext_resource type="Texture2D" uid="uid://de343kx88cdwd" path="res://assets/items/redpaint-plant-spritemap.png" id="6_ow3x6"]
+[ext_resource type="PackedScene" uid="uid://cy3huqhhicuce" path="res://inventory.tscn" id="8_nl6sp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dgb7q"]
 atlas = ExtResource("6_ow3x6")
@@ -68,8 +70,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qv0ty"]
 size = Vector2(80, 392)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bcqce"]
+size = Vector2(332.5, 450.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xyo7"]
-size = Vector2(43, 620.5)
+size = Vector2(52.75, 620.5)
 
 [node name="Room1" type="Node2D"]
 script = ExtResource("1_2f4aq")
@@ -80,10 +85,10 @@ offset_bottom = 40.0
 texture = ExtResource("1_ifqet")
 
 [node name="LaundryMachine1" parent="." instance=ExtResource("3_hww3j")]
-position = Vector2(952, 320)
+position = Vector2(792, 368)
 
 [node name="LaundryMachine2" parent="." instance=ExtResource("3_hww3j")]
-position = Vector2(1576, 320)
+position = Vector2(1048, 368)
 
 [node name="Plant" type="Area2D" parent="."]
 
@@ -105,27 +110,49 @@ sprite_frames = SubResource("SpriteFrames_55kmu")
 position = Vector2(1368, 364)
 shape = SubResource("RectangleShape2D_qv0ty")
 
-[node name="Player" parent="." instance=ExtResource("5_36dd3")]
-position = Vector2(136, 352)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="DialogueBox" parent="CanvasLayer" instance=ExtResource("4_tdoma")]
+[node name="Toothbrush" type="Area2D" parent="."]
 visible = false
-offset_left = 27.0
-offset_top = 363.0
-offset_right = 27.0
-offset_bottom = 363.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Toothbrush"]
+position = Vector2(1750, 212)
+texture = ExtResource("6_awv2q")
+
+[node name="ColorRect" type="ColorRect" parent="Toothbrush"]
+visible = false
+offset_left = 1582.0
+offset_top = 110.0
+offset_right = 1920.0
+offset_bottom = 312.0
+color = Color(0.823529, 0.286275, 0.305882, 0.615686)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Toothbrush"]
+position = Vector2(1754.75, 337.75)
+shape = SubResource("RectangleShape2D_bcqce")
+
+[node name="Player" parent="." instance=ExtResource("5_36dd3")]
+position = Vector2(122, 424)
+
+[node name="DialogueLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" parent="DialogueLayer" instance=ExtResource("4_tdoma")]
+visible = false
+offset_left = 32.0
+offset_top = 20.0
+offset_right = 32.0
+offset_bottom = 20.0
 
 [node name="walls" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
-position = Vector2(-23, 298)
+position = Vector2(-6.75, 296)
 shape = SubResource("RectangleShape2D_2xyo7")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
-position = Vector2(2070, 305)
+position = Vector2(2061.38, 307)
 shape = SubResource("RectangleShape2D_2xyo7")
+
+[node name="Inventory" parent="." instance=ExtResource("8_nl6sp")]
+visible = false
 
 [connection signal="body_entered" from="LaundryMachine1" to="." method="_on_laundry_machine_1_body_entered"]
 [connection signal="body_exited" from="LaundryMachine1" to="." method="_on_laundry_machine_1_body_exited"]
@@ -135,3 +162,5 @@ shape = SubResource("RectangleShape2D_2xyo7")
 [connection signal="body_exited" from="Plant" to="." method="_on_plant_body_exited"]
 [connection signal="body_entered" from="Detergent" to="." method="_on_detergent_body_entered"]
 [connection signal="body_exited" from="Detergent" to="." method="_on_detergent_body_exited"]
+[connection signal="body_entered" from="Toothbrush" to="." method="_on_toothbrush_body_entered"]
+[connection signal="body_exited" from="Toothbrush" to="." method="_on_toothbrush_body_exited"]
