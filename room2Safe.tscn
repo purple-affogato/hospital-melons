@@ -173,21 +173,6 @@ centered = false
 position = Vector2(225, 425)
 shape = SubResource("RectangleShape2D_xm6lq")
 
-[node name="heartLine" type="Control" parent="."]
-clip_contents = true
-layout_mode = 3
-anchors_preset = 0
-offset_left = 759.0
-offset_top = 205.0
-offset_right = 889.0
-offset_bottom = 285.0
-
-[node name="heart line" type="Sprite2D" parent="heartLine"]
-position = Vector2(-379, 50)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_bxo70")
-script = ExtResource("5_llnuk")
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -272,6 +257,21 @@ shape = SubResource("RectangleShape2D_p15ep")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_g3jkf")
 centered = false
+
+[node name="heartLine" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 759.0
+offset_top = 205.0
+offset_right = 889.0
+offset_bottom = 285.0
+
+[node name="heart line" type="Sprite2D" parent="heartLine"]
+position = Vector2(-379, 50)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_bxo70")
+script = ExtResource("5_llnuk")
 
 [node name="scissors" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

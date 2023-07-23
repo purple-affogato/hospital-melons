@@ -86,7 +86,9 @@ func idle():
 
 func interact():
 	$DiaCont/DialogueBox.visible = true
-	if interactObject == "heartThing":
+	if $code.win:
+		$DiaCont/DialogueBox.start_reading(["What are you waiting for, can't you hear the sounds of freedom?"])
+	elif interactObject == "heartThing":
 		if $heartLine.visible: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][1])
 		elif $Inventory.visible: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][2])
 		else: $DiaCont/DialogueBox.start_reading(dialogue[interactObject][0])
