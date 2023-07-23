@@ -159,7 +159,7 @@ func handle_sfx():
 	var text = dialogue_box.get_node("RichTextLabel").text
 	if text == dialogue["step2"][2]:
 		$Radio.position = $LaundryMachine2.position
-		$Radio.stream = load("res://assets/audio/whoosh.wav")
+		$Radio.stream = load("res://assets/audio/portal.ogg")
 	elif text == dialogue["step1"][5]:
 		$Radio.position = $Toothbrush/CollisionShape2D.position
 		$Radio.stream = load("res://assets/audio/creaking.ogg")
